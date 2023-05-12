@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="label">MyCompany</string>
+    <string name="middlename">Отчество</string>
+    <string name="firstname">Имя</string>
+    <string name="lastname">Фамилия</string>
+    <string name="change_password">Изменить пароль</string>
+    <string name="password">Password</string>
+    <string name="logout">Выйти</string>
+    <string name="change_user_data">Изменить данные</string>
+    <string name="phone_number">Номер</string>
+    <string name="old_password">Введите свой пароль</string>
+    <string name="new_password">Введите новый пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="user_name">User name</string>
+    <string name="message_text">Message text</string>
+</resources>

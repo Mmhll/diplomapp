@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Hueta</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="chat">Chat</string>
+    <string name="label">MyCompany</string>
+    <string name="middlename">Отчество</string>
+    <string name="firstname">Имя</string>
+    <string name="lastname">Фамилия</string>
+    <string name="change_password">Изменить пароль</string>
+    <string name="password">Password</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="email">Email</string>
+    <string name="logout">Выйти</string>
+    <string name="change_user_data">Изменить данные</string>
+    <string name="phone_number">Номер</string>
+    <string name="old_password">Введите свой пароль</string>
+    <string name="new_password">Введите новый пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="user_name">User name</string>
+    <string name="message_text">Message text</string>
+</resources>
