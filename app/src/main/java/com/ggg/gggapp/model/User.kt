@@ -4,6 +4,7 @@ data class User(
     val id: Long,
     val username: String,
     val email: String,
+    val roles: ArrayList<Role>,
     val userData: UserData
 )
 

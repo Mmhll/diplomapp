@@ -1,139 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.auth.RegistrationFragment"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="50dp"
+    tools:context=".fragments.auth.RegistrationFragment">
 
-    <LinearLayout
+
+    <EditText
+        android:id="@+id/emailText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="150dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <EditText
-                android:layout_width="270dp"
-                android:layout_height="wrap_content"
-                android:hint="URL or"
-                android:id="@+id/avatarText"
-                android:backgroundTint="@color/orange"
-                />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/addImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="фото"
-                android:background="@drawable/conner"
-                android:textColor="@color/white"/>
-
-        </LinearLayout>
-
-        <EditText
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            
-            android:hint="Email"
-            android:id="@+id/emailText"
-            />
-
-        <EditText
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            
-            android:hint="Password"
-            android:id="@+id/passwordText"
-            android:inputType="textPassword"
-            />
-
-        <EditText
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            
-            android:hint="Имя"
-            android:id="@+id/nameText"
-            />
-
-        <EditText
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            
-            android:hint="Фамилия"
-            android:id="@+id/surnameText"
-            />
-
-        <EditText
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            
-            android:hint="Отчество"
-            android:id="@+id/patronymicText"
-            />
-
-        <EditText
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            
-            android:hint="Номер телефона"
-            android:id="@+id/phoneNumberText"
-            />
-
-        <Spinner
-            android:id="@+id/sexText"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/conner"
-            android:layout_marginTop="35dp"
-            android:text="Регистрация"
-            android:textColor="@color/white"
-            android:id="@+id/RegButton"
-            />
+        android:layout_height="wrap_content"
+        android:hint="@string/email" />
 
 
+    <EditText
+        android:id="@+id/firstnameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/name" />
 
-        <LinearLayout
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+    <EditText
+        android:id="@+id/lastnameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lastname" />
 
-            <CheckBox
-                android:id="@+id/Check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:layout_marginLeft="15dp"
-                />
+    <EditText
+        android:id="@+id/middlenameText"
+        android:layout_width="match_parent"
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Согласие на обработку персональных данных"
-                android:textSize="15dp"
-                android:textStyle="italic"
+        android:layout_height="wrap_content"
+        android:hint="@string/middlename" />
 
-                />
+    <EditText
+        android:id="@+id/phoneNumberText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/phone_number" />
 
-        </LinearLayout>
+    <EditText
+        android:id="@+id/passwordText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
 
-
-
-
-    </LinearLayout>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/RegButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/conner"
+        android:text="@string/register"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</androidx.appcompat.widget.LinearLayoutCompat>

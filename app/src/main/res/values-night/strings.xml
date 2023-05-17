@@ -17,4 +17,10 @@
     <string name="sample_receiver">sample receiver</string>
     <string name="sample_text">sample text</string>
     <string name="sample_time">20:00 20.01.1900</string>
+    <string name="register">Зарегистрировать пользователя</string>
+    <string name="name">Имя</string>
+    <string name="initials">Иванов Иван Иванович</string>
+    <string name="user_role">Роль</string>
+    <string name="email_template">test@email.test</string>
+    <string name="create_chat">Создать чат</string>
 </resources>

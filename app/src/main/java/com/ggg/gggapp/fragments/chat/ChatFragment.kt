@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.ggg.gggapp.R
 import com.ggg.gggapp.adapters.ChatAdapter
 import com.ggg.gggapp.databinding.FragmentChatBinding
@@ -36,11 +37,11 @@ class ChatFragment : Fragment() {
         val token = requireActivity().getSharedPreferences("token", Context.MODE_PRIVATE).getString("token", "").toString()
         val jwtParser = JWTParser(token)
         val id = jwtParser.getId()
+        val adapter = ChatAdapter(requireContext())
         viewModel.getChats("Bearer $token", id)
         viewModel.status.observe(viewLifecycleOwner){
             when (it){
                 ApiStatus.COMPLETE -> {
-                    val adapter = ChatAdapter(requireContext())
                     binding.recyclerChat.adapter = adapter
                     adapter.setChats(viewModel.chats.value!!)
                     adapter.setOnItemClickListener(object: ChatAdapter.onItemClickListener{
@@ -58,6 +59,27 @@ class ChatFragment : Fragment() {
 
                 }
             }
+        }
+        binding.swiperefresh.setOnRefreshListener {
+            binding.swiperefresh.isRefreshing = false
+            viewModel.getChats("Bearer $token", id)
+            viewModel.status.observe(viewLifecycleOwner){
+                when (it){
+                    ApiStatus.COMPLETE -> {
+                        binding.recyclerChat.adapter = adapter
+                        adapter.setChats(viewModel.chats.value!!)
+                    }
+                    ApiStatus.FAILED -> {
+                        Log.e("Error", "hmm")
+                    }
+                    else -> {
+
+                    }
+                }
+            }
+        }
+        binding.createChatButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_chat_to_createChatFragment)
         }
     }
 

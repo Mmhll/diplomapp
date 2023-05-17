@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.auth0.android.jwt.JWT
 import com.ggg.gggapp.R
 import com.ggg.gggapp.activities.MainActivity
@@ -113,7 +114,9 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(requireActivity(), MainActivity::class.java))
             requireActivity().finish()
         }
-
+        binding.createUserButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_profile_to_registrationFragment)
+        }
 
     }
 

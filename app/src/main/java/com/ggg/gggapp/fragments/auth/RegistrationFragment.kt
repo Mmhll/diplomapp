@@ -1,13 +1,19 @@
 package com.ggg.gggapp.fragments.auth
 
-import android.app.Activity.RESULT_OK
-import android.content.Intent
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ggg.gggapp.databinding.FragmentRegBinding
+import com.ggg.gggapp.utils.ApiStatus
+import com.ggg.gggapp.viewmodel.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,75 +21,73 @@ class RegistrationFragment : Fragment() {
 
     private var _binding: FragmentRegBinding? = null
     private val binding get() = _binding!!
-    /*    private lateinit var auth: FirebaseAuth
-        private lateinit var dataClass: User
-        val firebaseStorage = FirebaseStorage.getInstance().getReference("Images")*/
-    var image = ""
+    private val viewModel by viewModels<AuthViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRegBinding.inflate(inflater)
-//        auth = Firebase.auth
-//        dataClass = User()
-//        binding.addImage.setOnClickListener {
-//            AlertDialog.Builder(activity).setPositiveButton("Сделать снимок") { p0, p1 ->
-//                val intent = Intent(Intent.ACTION_PICK)
-//                intent.type = "image/*"
-//                startActivityForResult(intent, 1)
-//            }.setNegativeButton("Использовать ссылку") { _, _ ->
-//
-//            }.create().show()
-//        }
-        /* binding.RegButton.setOnClickListener {
-             if (!binding.emailText.text.toString().isEmpty() && binding.Check.isChecked
-                 && !binding.nameText.text.toString()
-                     .isEmpty() && !binding.patronymicText.text.toString().isEmpty()
-                 && !binding.phoneNumberText.text.toString()
-                     .isEmpty() && !binding.sexText.selectedItem.toString().isEmpty()
-                 && !binding.surnameText.text.toString()
-                     .isEmpty() && !binding.passwordText.text.toString().isEmpty()
-             ) {
-                 if (image.isNotEmpty() || binding.avatarText.text.toString().isNotEmpty()) {
-                     if (image.isNotEmpty()) {
-                         dataClass.avatar = image
-                     } else {
-                         dataClass.avatar = binding.avatarText.text.toString()
-                     }
-                     dataClass.email = binding.emailText.text.toString()
-                     dataClass.name = binding.nameText.text.toString()
-                     dataClass.patronymic = binding.patronymicText.text.toString()
-                     dataClass.phoneNumber = binding.phoneNumberText.text.toString()
-                     dataClass.position = "User"
-                     dataClass.sex = binding.sexText.selectedItem.toString()
-                     dataClass.surname = binding.surnameText.text.toString()
-                     auth.createUserWithEmailAndPassword(
-                         binding.emailText.text.toString(),
-                         binding.passwordText.text.toString()
-                     ).addOnCompleteListener {
-                         if (it.isSuccessful) {
-                             dataClass.uid = Firebase.auth.uid
-                             Database().putUser(Database().getUsers(), dataClass)
-                             requireActivity().startActivity(
-                                 Intent(
-                                     requireActivity(),
-                                     BottomNavigationActivity::class.java
-                                 )
-                             )
-                             requireActivity().finish()
-                         } else {
-                             Toast.makeText(activity, "Регистрация провалена", Toast.LENGTH_SHORT)
-                                 .show()
-                         }
-                     }
-                 }
-             } else {
-                 Toast.makeText(activity, "Вы оставили какое-то поле пустым", Toast.LENGTH_SHORT)
-                     .show()
-             }
-         }*/
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val prefs = requireActivity().getSharedPreferences("token", Context.MODE_PRIVATE)
+        val token = prefs.getString("token", "")!!
+
+        binding.RegButton.setOnClickListener {
+            val email = binding.emailText.text.toString()
+            val password = binding.passwordText.text.toString()
+            val firstname = binding.firstnameText.text.toString()
+            val lastname = binding.lastnameText.text.toString()
+            val middlename = binding.middlenameText.text.toString()
+            val phoneNumber = binding.phoneNumberText.text.toString()
+            if (
+                email.isNotEmpty() &&
+                password.isNotEmpty() &&
+                firstname.isNotEmpty() &&
+                lastname.isNotEmpty() &&
+                middlename.isNotEmpty() &&
+                phoneNumber.isNotEmpty()
+            ) {
+                viewModel.register(
+                    token,
+                    email,
+                    password,
+                    firstname,
+                    lastname,
+                    middlename,
+                    phoneNumber
+                )
+                viewModel.status.observe(viewLifecycleOwner) {
+                    when (it) {
+                        ApiStatus.COMPLETE -> {
+                            AlertDialog.Builder(requireContext())
+                                .setTitle("Пользователь зарегистрирован")
+                                .setMessage(
+                                    "Для входа в поле username используйте ваш первоначальный email до знака '@' (${
+                                        email.split(
+                                            '@'
+                                        )[0]
+                                    })\nСоветуем изменить пароль при первом входе"
+                                )
+                                .setPositiveButton("Ok") { _, _ ->
+                                    findNavController().popBackStack()
+                                }
+                                .create()
+                                .show()
+                        }
+                        ApiStatus.FAILED -> {
+                            Toast.makeText(requireContext(), "Пользователь с этим первоначальным email уже зарегистрирован", Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {}
+                    }
+                }
+            } else {
+                Toast.makeText(requireContext(), "Какое-то из полей пустое", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onDestroyView() {
