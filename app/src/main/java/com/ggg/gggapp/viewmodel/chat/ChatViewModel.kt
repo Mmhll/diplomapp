@@ -18,20 +18,20 @@ class ChatViewModel @Inject constructor(
     @Named("chatRepository") private val chatRepository: ChatRepository,
 ) : ViewModel() {
     private val _status: MutableLiveData<ApiStatus> = MutableLiveData()
-    val status : LiveData<ApiStatus> get() = _status
-    private val _chats: MutableLiveData<List<Chat>> = MutableLiveData()
-    val chats: LiveData<List<Chat>> get() = _chats
+    val status: LiveData<ApiStatus> get() = _status
+    private val _chats: MutableLiveData<ArrayList<Chat>> = MutableLiveData()
+    val chats: LiveData<ArrayList<Chat>> get() = _chats
 
-    fun getChats(token: String, id: Long){
+    fun getChats(token: String, id: Long) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
-            chatRepository.getChats(token, id).collect{
-                try {
+            try {
+                chatRepository.getChats(token, id).collect {
                     _chats.value = it
-                    _status.value =ApiStatus.COMPLETE
-                } catch (e: HttpException){
-                    _status.value = ApiStatus.FAILED
+                    _status.value = ApiStatus.COMPLETE
                 }
+            } catch (e: HttpException) {
+                _status.value = ApiStatus.FAILED
             }
         }
     }

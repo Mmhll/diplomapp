@@ -14,7 +14,7 @@ import javax.inject.Singleton
 class CommonModule {
     @Provides
     @Named("BASE_URL")
-    fun provideBaseURL(): String = "http://185.177.216.63:8000/api/"
+    fun provideBaseURL(): String = "http://185.177.216.63:8001/api/"
 
     @Provides
     @Singleton

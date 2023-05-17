@@ -26,5 +26,14 @@
         android:id="@+id/navigation_chat"
         android:name="com.ggg.gggapp.fragments.chat.ChatFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
+        tools:layout="@layout/fragment_chat" >
+        <action
+            android:id="@+id/action_navigation_chat_to_oneChatFragment"
+            app:destination="@id/oneChatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/oneChatFragment"
+        android:name="com.ggg.gggapp.fragments.chat.OneChatFragment"
+        android:label="fragment_one_chat"
+        tools:layout="@layout/fragment_one_chat" />
 </navigation>

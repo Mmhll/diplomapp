@@ -14,4 +14,7 @@
     <string name="repeat_password">Повторите пароль</string>
     <string name="user_name">User name</string>
     <string name="message_text">Message text</string>
+    <string name="sample_receiver">sample receiver</string>
+    <string name="sample_text">sample text</string>
+    <string name="sample_time">20:00 20.01.1900</string>
 </resources>

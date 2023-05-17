@@ -1,6 +1,5 @@
 package com.ggg.gggapp.fragments.chat
 
-import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -9,14 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.auth0.android.jwt.JWT
+import androidx.navigation.fragment.findNavController
+import com.ggg.gggapp.R
+import com.ggg.gggapp.adapters.ChatAdapter
 import com.ggg.gggapp.databinding.FragmentChatBinding
 import com.ggg.gggapp.utils.ApiStatus
 import com.ggg.gggapp.utils.JWTParser
 import com.ggg.gggapp.viewmodel.chat.ChatViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class ChatFragment : Fragment() {
@@ -28,19 +27,7 @@ class ChatFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentChatBinding.inflate(inflater)
-        binding.sendButton.setOnClickListener {
-            if (binding.messageChat.text.isNotEmpty()) {
-                /*Messenger().sendMessage(
-                    message = MessageClass(
-                        messageText = binding!!.messageChat.text.toString(),
-                        time = currentDate,
-                        userId = Firebase.auth.uid
-                    )
-                )*/
-                binding.messageChat.text.clear()
-            }
-        }
+        _binding = FragmentChatBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -53,15 +40,23 @@ class ChatFragment : Fragment() {
         viewModel.status.observe(viewLifecycleOwner){
             when (it){
                 ApiStatus.COMPLETE -> {
-                    AlertDialog.Builder(requireContext())
-                        .setMessage(viewModel.chats.value.toString())
-                        .show()
+                    val adapter = ChatAdapter(requireContext())
+                    binding.recyclerChat.adapter = adapter
+                    adapter.setChats(viewModel.chats.value!!)
+                    adapter.setOnItemClickListener(object: ChatAdapter.onItemClickListener{
+                        override fun onItemClick(position: Int) {
+                            requireActivity().getSharedPreferences("chat_id", Context.MODE_PRIVATE).edit().putLong(
+                                "id", viewModel.chats.value!![position].id).apply()
+                            findNavController().navigate(R.id.action_navigation_chat_to_oneChatFragment)
+                        }
+                    })
                 }
                 ApiStatus.FAILED -> {
                     Log.e("Error", "hmm")
                 }
+                else -> {
 
-                else -> {}
+                }
             }
         }
     }

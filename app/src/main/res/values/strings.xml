@@ -4,7 +4,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_profile">Profile</string>
     <string name="chat">Chat</string>
     <string name="label">MyCompany</string>
     <string name="middlename">Отчество</string>
@@ -22,4 +22,7 @@
     <string name="repeat_password">Повторите пароль</string>
     <string name="user_name">User name</string>
     <string name="message_text">Message text</string>
+    <string name="sample_receiver">sample receiver</string>
+    <string name="sample_text">sample text</string>
+    <string name="sample_time">20:00 20.01.1900</string>
 </resources>

@@ -25,18 +25,4 @@ class BottomNavigationActivity : AppCompatActivity() {
 
         navView.setupWithNavController(navController)
     }
-
-    /*override fun onBackPressed() {
-
-       *//* if (supportFragmentManager.findFragmentById(R.id.layoutFragment) == WorkTimeViewModel()) {
-            supportFragmentManager.beginTransaction()
-                .remove(WorkTimeViewModel())
-                .commit()
-        }
-        else if (supportFragmentManager.findFragmentById(R.id.layoutFragment) == RolesViewModel()){
-            supportFragmentManager.beginTransaction()
-                .remove(RolesViewModel())
-                .commit()
-        }*//*
-    }*/
 }

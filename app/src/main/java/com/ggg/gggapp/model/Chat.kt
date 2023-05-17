@@ -1,10 +1,10 @@
 package com.ggg.gggapp.model
 
 data class Chat(
-    val created_at: String,
     val id: Long,
-    val messages: List<Message>,
     val title: String,
-    val updated_at: String,
+    val createdAt: String,
+    val updatedAt: String,
+    val messages: List<Message>,
     val users: List<User>
 )
