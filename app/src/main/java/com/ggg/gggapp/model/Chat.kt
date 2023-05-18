@@ -5,6 +5,6 @@ data class Chat(
     val title: String,
     val createdAt: String,
     val updatedAt: String,
-    val messages: List<Message>,
-    val users: List<User>
+    val messages: ArrayList<Message>,
+    val users: ArrayList<User>
 )

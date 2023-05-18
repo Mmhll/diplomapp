@@ -8,14 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ggg.gggapp.adapters.UserAdapter
 import com.ggg.gggapp.databinding.FragmentAddUserBinding
-import com.ggg.gggapp.model.User
 import com.ggg.gggapp.utils.ApiStatus
-import com.ggg.gggapp.utils.JWTParser
 import com.ggg.gggapp.viewmodel.chat.AddUserViewModel
+import com.ggg.gggapp.viewmodel.common.CommonChatViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +24,7 @@ class AddUserFragment : Fragment() {
     private var _binding: FragmentAddUserBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<AddUserViewModel>()
+    private val commonViewModel by activityViewModels<CommonChatViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,31 +41,31 @@ class AddUserFragment : Fragment() {
         prefs = requireActivity().getSharedPreferences("chat_id", Context.MODE_PRIVATE)
         val id = prefs.getLong("id", 0)
         val adapter = UserAdapter(requireContext())
-        val jwtParser = JWTParser(token)
         binding.createChatUserRecyclerView.adapter = adapter
         viewModel.getUsers(token)
         viewModel.userStatus.observe(viewLifecycleOwner){ status ->
             when (status){
                 ApiStatus.COMPLETE -> {
-                    val users = viewModel.users.value!!
-                    val usersWithoutCurrent: MutableList<User> = ArrayList()
-                    users.forEach {
-                        if (it.id != jwtParser.getId()) {
-                            usersWithoutCurrent.add(it)
-                        }
+                    val chatUsers = commonViewModel.chat.value!!.users
+                    if (chatUsers.isNotEmpty()) {
+                        val users = viewModel.users.value!!
+                        users.removeAll(chatUsers.toSet())
+                        adapter.setUsers(users)
                     }
-                    adapter.setUsers(usersWithoutCurrent)
                 }
                 else -> {}
             }
         }
         binding.addUserButton.setOnClickListener {
-            if (adapter.getUserIds().size != 0) {
-                val users = adapter.getUserIds()
-                viewModel.addUser(token, users as ArrayList<Long>, id)
+            val userIds = adapter.getUserIds()
+            if (userIds.size != 0) {
+                viewModel.addUser(token, userIds as ArrayList<Long>, id)
                 viewModel.chatStatus.observe(viewLifecycleOwner) {
                     when (it) {
                         ApiStatus.COMPLETE -> {
+                            userIds.forEach {
+                                commonViewModel.chat.value!!.users.removeIf { user -> user.id == it}
+                            }
                             AlertDialog.Builder(requireContext())
                                 .setTitle("Успешно")
                                 .setMessage("Выбранные пользователи были добавлены")

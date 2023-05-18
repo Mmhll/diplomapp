@@ -13,6 +13,6 @@ interface ChatService {
     suspend fun getChat(@Header("Authorization") token: String, @Query("id") id: String): Chat
     @POST("chat/create")
     suspend fun createChat(@Header("Authorization") token: String, @Body request: CreateChatRequest): MessageResponse
-    @POST("chat/add_member")
+    @POST("chat/add_chat_member")
     suspend fun addMember(@Header("Authorization") token: String, @Body request: ChatAndUserRequest): MessageResponse
 }
