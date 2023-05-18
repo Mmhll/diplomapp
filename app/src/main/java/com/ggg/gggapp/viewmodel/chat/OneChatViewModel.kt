@@ -1,5 +1,6 @@
 package com.ggg.gggapp.viewmodel.chat
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -51,7 +52,7 @@ class OneChatViewModel @Inject constructor(
         viewModelScope.launch {
             _messageStatus.value = ApiStatus.LOADING
             try {
-                messageRepository.sendMessage(token, chat_id, message, user_id).collect {
+                messageRepository.sendMessage(token, user_id, message, chat_id).collect {
                     if (it.message == "Message was saved") {
                         _messageStatus.value = ApiStatus.COMPLETE
                     } else {

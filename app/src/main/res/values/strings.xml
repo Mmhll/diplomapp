@@ -31,4 +31,7 @@
     <string name="user_role">Роль</string>
     <string name="email_template">test@email.test</string>
     <string name="create_chat">Создать чат</string>
+    <string name="name_of_chat">Введите название чата</string>
+    <string name="users_count">Users count</string>
+    <string name="chat_name">Chat name</string>
 </resources>

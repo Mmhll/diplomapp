@@ -1,6 +1,9 @@
 package com.ggg.gggapp.repository
 
 import com.ggg.gggapp.model.Chat
+import com.ggg.gggapp.remote_model.ChatAndUserRequest
+import com.ggg.gggapp.remote_model.CreateChatRequest
+import com.ggg.gggapp.remote_model.MessageResponse
 import com.ggg.gggapp.service.ChatService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -14,9 +17,25 @@ class ChatRepository @Inject constructor(@Named("chatService") private val servi
         }
     }
 
-    suspend fun getChat(token: String, id: Long): Flow<Chat>{
+    suspend fun getChat(token: String, id: Long): Flow<Chat> {
         return flow {
             emit(service.getChat("Bearer $token", id.toString()))
+        }
+    }
+
+    suspend fun createChat(
+        token: String,
+        name: String,
+        members: ArrayList<Long>
+    ): Flow<MessageResponse> {
+        return flow {
+            emit(service.createChat("Bearer $token", CreateChatRequest(members, name)))
+        }
+    }
+
+    suspend fun addMember(token: String, chat_id: Long, user_id: Long): Flow<MessageResponse> {
+        return flow {
+            emit(service.addMember("Bearer $token", ChatAndUserRequest(chat_id, user_id)))
         }
     }
 }

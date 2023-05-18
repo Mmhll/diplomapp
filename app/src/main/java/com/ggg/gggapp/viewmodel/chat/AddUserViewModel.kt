@@ -15,7 +15,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @HiltViewModel
-class CreateChatViewModel @Inject constructor(
+class AddUserViewModel @Inject constructor(
     @Named("userRepository") private val userRepository: UserRepository,
     @Named("chatRepository") private val chatRepository: ChatRepository
 ) : ViewModel() {
@@ -25,8 +25,9 @@ class CreateChatViewModel @Inject constructor(
     val userStatus: LiveData<ApiStatus> get() = _userStatus
     private val _chatStatus: MutableLiveData<ApiStatus> = MutableLiveData()
     val chatStatus: LiveData<ApiStatus> get() = _chatStatus
+    private val _internalStatus: MutableLiveData<ApiStatus> = MutableLiveData()
 
-    fun getUsers(token: String){
+    fun getUsers(token: String) {
         viewModelScope.launch {
             _userStatus.value = ApiStatus.LOADING
             try {
@@ -34,26 +35,33 @@ class CreateChatViewModel @Inject constructor(
                     _users.value = it
                     _userStatus.value = ApiStatus.COMPLETE
                 }
-            } catch (e: HttpException){
+            } catch (e: HttpException) {
                 _userStatus.value = ApiStatus.FAILED
             }
         }
     }
 
-    fun createChat(token: String, user_ids: ArrayList<Long>, name: String){
+    fun addUser(token: String, user_ids: ArrayList<Long>, chat_id: Long){
         viewModelScope.launch {
             _chatStatus.value = ApiStatus.LOADING
-            try {
-                chatRepository.createChat(token, name, user_ids).collect{
-                    _chatStatus.value = ApiStatus.COMPLETE
-                    if (it.message != "Chat was created"){
-                        ApiStatus.FAILED
+            /*try {*/
+                for (i in user_ids){
+                    chatRepository.addMember(token, chat_id, i).collect { messageResponse ->
+                        if (messageResponse.message != "User was added") {
+                            _internalStatus.value = ApiStatus.FAILED
+                        }
+                    }
+                    if (_internalStatus.value == ApiStatus.FAILED){
+                        _chatStatus.value = ApiStatus.FAILED
+                        break
                     }
                 }
-            } catch (e: HttpException){
+                if (_internalStatus.value != ApiStatus.FAILED){
+                    _chatStatus.value = ApiStatus.COMPLETE
+                }
+            /*} catch (e: HttpException) {
                 _chatStatus.value = ApiStatus.FAILED
-            }
+            }*/
         }
     }
-
 }

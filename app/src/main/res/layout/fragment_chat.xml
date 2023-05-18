@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/grey_white"
     android:paddingVertical="?actionBarSize"
+    android:paddingHorizontal="16dp"
     tools:context=".fragments.chat.ChatFragment">
 
     <androidx.appcompat.widget.AppCompatButton

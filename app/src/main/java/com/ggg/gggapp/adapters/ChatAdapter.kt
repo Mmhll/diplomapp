@@ -11,7 +11,7 @@ import com.ggg.gggapp.R
 import com.ggg.gggapp.model.Chat
 import dagger.hilt.android.qualifiers.ApplicationContext
 
-class ChatAdapter(@ApplicationContext val context: Context) :
+class ChatAdapter(val context: Context) :
     RecyclerView.Adapter<ChatAdapter.VH>() {
 
     private var chats: MutableList<Chat> = ArrayList()
@@ -51,7 +51,7 @@ class ChatAdapter(@ApplicationContext val context: Context) :
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         if (chats.isNotEmpty()) {
-            Log.e("TAG", chats[position].toString())
+            chats.sortByDescending { it.updatedAt }
             if (chats[position].updatedAt == null) {
                 holder.time.text = chats[position].createdAt
                 holder.message.text = "Чат создан"

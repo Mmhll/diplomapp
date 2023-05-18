@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ggg.gggapp.R
 import com.ggg.gggapp.model.User
 
-class UserRecycler(val context: Context) :
-    RecyclerView.Adapter<UserRecycler.UserRecyclerViewHolder>() {
+class UserAdapter(val context: Context) :
+    RecyclerView.Adapter<UserAdapter.UserRecyclerViewHolder>() {
     private var users: MutableList<User> = ArrayList()
     private var usersSelected: MutableList<Long> = ArrayList()
 

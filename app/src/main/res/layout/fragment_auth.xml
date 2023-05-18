@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical"
         android:layout_marginTop="200dp">
 
@@ -56,32 +57,6 @@
             android:text="Авторизация"
             android:textColor="@color/white"
             />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center|bottom"
-            android:layout_gravity="bottom"
-            android:layout_weight="1.0">
-
-            <TextView
-                android:layout_width="190dp"
-                android:layout_height="wrap_content"
-                android:text="Don’t have an account yet?"
-                android:gravity="center"
-                />
-
-            <TextView
-                android:layout_width="55dp"
-                android:layout_height="wrap_content"
-                android:text="Sign Up"
-                android:gravity="center"
-                android:textColor="@color/orange"
-                android:id="@+id/RegButton"
-                />
-
-        </LinearLayout>
 
     </LinearLayout>
 

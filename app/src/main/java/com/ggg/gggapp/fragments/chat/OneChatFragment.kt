@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ggg.gggapp.R
 import com.ggg.gggapp.adapters.OneChatAdapter
 import com.ggg.gggapp.databinding.FragmentOneChatBinding
 import com.ggg.gggapp.utils.ApiStatus
 import com.ggg.gggapp.utils.JWTParser
+import com.ggg.gggapp.utils.getEnding
 import com.ggg.gggapp.viewmodel.chat.OneChatViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,13 +37,13 @@ class OneChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var sharedPrefs = requireActivity().getSharedPreferences("token", Context.MODE_PRIVATE)
-        val token = sharedPrefs.getString("token", "")
+        val token = sharedPrefs.getString("token", "")!!
         sharedPrefs = requireActivity().getSharedPreferences("chat_id", Context.MODE_PRIVATE)
         val id = sharedPrefs.getLong("id", 0)
-        Log.e("id", "ID: $id; user_id: ${JWTParser(token!!).getId()}")
         val jwt = JWTParser(token)
         val adapter = OneChatAdapter(jwt.getId())
         val manager = LinearLayoutManager(requireContext())
+
         manager.orientation = LinearLayoutManager.VERTICAL
         manager.stackFromEnd = true
         manager.isSmoothScrollbarEnabled = false
@@ -50,20 +53,24 @@ class OneChatFragment : Fragment() {
         viewModel.status.observe(viewLifecycleOwner) {
             when (it) {
                 ApiStatus.COMPLETE -> {
-                    val data = viewModel.chat.value!!.messages
+                    val chat = viewModel.chat.value!!
+                    binding.oneChatName.text = chat.title
+                    val userCount = chat.users.size
+                    val oneChatCountText = "$userCount участник${getEnding(userCount)}"
+                    binding.oneChatCount.text = oneChatCountText
+                    val data = chat.messages
                     if (adapter.getMessages() != data.toMutableList()) {
                         adapter.addMessages(data.toMutableList())
                         binding.recyclerOneChat.scrollToPosition(data.size - 1)
                     }
                 }
-                ApiStatus.FAILED -> {
-
-                }
+                ApiStatus.FAILED -> {}
                 else -> {}
             }
         }
         binding.sendMessageButton.setOnClickListener {
             val message = binding.newMessageInput.text.toString()
+            Log.e("TAG", message)
             if (message.isNotEmpty()) {
                 viewModel.sendMessage(token, JWTParser(token).getId(), message, id)
                 viewModel.messageStatus.observe(viewLifecycleOwner){
@@ -76,6 +83,9 @@ class OneChatFragment : Fragment() {
                     }
                 }
             }
+        }
+        binding.linearChatUsersButton.setOnClickListener {
+            findNavController().navigate(R.id.action_oneChatFragment_to_chatUsersFragment)
         }
     }
 }

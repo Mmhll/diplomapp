@@ -18,7 +18,7 @@ interface UserService {
     suspend fun updateUserPassword(@Header("Authorization") token: String, @Body request: UpdatePasswordRequest): MessageResponse
 
     @GET("user/find_all")
-    suspend fun getAllUsers(@Header("Authorization") token: String): List<User>
+    suspend fun getAllUsers(@Header("Authorization") token: String): ArrayList<User>
 
     @GET("user/delete_user")
     suspend fun deleteUser(@Header("Authorization") token: String, @Body request: OneParamRequest): MessageResponse

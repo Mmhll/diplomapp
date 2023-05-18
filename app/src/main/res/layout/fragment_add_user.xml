@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
-    tools:context=".fragments.chat.CreateChatFragment">
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/name_of_chat"
-        android:paddingHorizontal="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".fragments.chat.AddUserFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/createChatUserRecyclerView"
@@ -23,13 +14,13 @@
         android:orientation="vertical"
         android:paddingVertical="20dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/createNewChatButton"
+        app:layout_constraintBottom_toTopOf="@+id/addUserButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/createNewChatButton"
+        android:id="@+id/addUserButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/conner"

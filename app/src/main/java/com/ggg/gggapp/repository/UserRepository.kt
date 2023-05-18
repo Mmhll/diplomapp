@@ -24,7 +24,7 @@ class UserRepository @Inject constructor(private val userService: UserService) {
         }
     }
 
-    fun getUsers(token: String): Flow<List<User>> {
+    fun getUsers(token: String): Flow<ArrayList<User>> {
         return flow {
             emit(userService.getAllUsers("Bearer $token"))
         }

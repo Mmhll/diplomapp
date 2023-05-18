@@ -21,9 +21,7 @@ class ChatModule {
         retrofit.create(ChatService::class.java)
 
     @Provides
-    @Singleton
     @Named("chatRepository")
     fun provideRepository(@Named("chatService") service: ChatService): ChatRepository =
         ChatRepository(service)
-
 }

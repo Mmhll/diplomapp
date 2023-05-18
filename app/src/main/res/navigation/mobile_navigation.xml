@@ -42,7 +42,14 @@
         android:id="@+id/oneChatFragment"
         android:name="com.ggg.gggapp.fragments.chat.OneChatFragment"
         android:label="fragment_one_chat"
-        tools:layout="@layout/fragment_one_chat" />
+        tools:layout="@layout/fragment_one_chat" >
+        <action
+            android:id="@+id/action_oneChatFragment_to_chatUsersFragment"
+            app:destination="@id/chatUsersFragment" />
+        <action
+            android:id="@+id/action_oneChatFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.ggg.gggapp.fragments.auth.RegistrationFragment"
@@ -52,5 +59,23 @@
         android:id="@+id/createChatFragment"
         android:name="com.ggg.gggapp.fragments.chat.CreateChatFragment"
         android:label="fragment_create_chat"
-        tools:layout="@layout/fragment_create_chat" />
+        tools:layout="@layout/fragment_create_chat" >
+        <action
+            android:id="@+id/action_createChatFragment_to_navigation_chat"
+            app:destination="@id/navigation_chat" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatUsersFragment"
+        android:name="com.ggg.gggapp.fragments.chat.ChatUsersFragment"
+        android:label="fragment_chat_users"
+        tools:layout="@layout/fragment_chat_users" >
+        <action
+            android:id="@+id/action_chatUsersFragment_to_addUserFragment"
+            app:destination="@id/addUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addUserFragment"
+        android:name="com.ggg.gggapp.fragments.chat.AddUserFragment"
+        android:label="fragment_add_user"
+        tools:layout="@layout/fragment_add_user" />
 </navigation>
