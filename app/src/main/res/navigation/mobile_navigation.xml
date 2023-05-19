@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_news"
-        android:name="com.ggg.gggapp.fragments.news.NewsFragment"
+        android:name="com.ggg.gggapp.fragments.tasks.TasksFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_task" />
 
     <fragment
         android:id="@+id/navigation_profile"

@@ -14,4 +14,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "gggapp"
 include ':app'
-include ':gggwp'

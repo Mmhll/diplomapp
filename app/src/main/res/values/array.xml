@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="task_array">
+        <item>Исполнитель</item>
+        <item>Участник</item>
+        <item>Постановщик</item>
+    </string-array>
+</resources>

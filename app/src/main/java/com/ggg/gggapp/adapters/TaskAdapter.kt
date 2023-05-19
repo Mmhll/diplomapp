@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ggg.gggapp.R
 import com.ggg.gggapp.model.NewsClass
 
-class NewsAdapter(val data: ArrayList<NewsClass>, val context: Context) :
-    RecyclerView.Adapter<NewsAdapter.VHH>() {
+class TaskAdapter(val data: ArrayList<NewsClass>, val context: Context) :
+    RecyclerView.Adapter<TaskAdapter.VHH>() {
 
     class VHH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var title: TextView = itemView.findViewById(R.id.titleText)

@@ -8,8 +8,8 @@
 
     <item
         android:id="@+id/navigation_news"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="Новости" />
+        android:icon="@drawable/task_img"
+        android:title="Задачи" />
 
     <item
         android:id="@+id/navigation_profile"

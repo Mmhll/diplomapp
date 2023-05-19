@@ -35,4 +35,12 @@
     <string name="users_count">Users count</string>
     <string name="chat_name">Chat name</string>
     <string name="add_user">Добавить пользователя</string>
+    <string name="responsible">Исполнитель</string>
+    <string name="deadline">Дедлайн</string>
+    <string name="priority">Приоритет</string>
+    <string name="status">Статус</string>
+    <string name="listOfTasks">Список задач</string>
+    <string name="addTask">Добавить задачу</string>
+
+
 </resources>

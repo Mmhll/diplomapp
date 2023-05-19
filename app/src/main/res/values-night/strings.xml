@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Hueta</string>
+    <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_profile">Profile</string>
+    <string name="chat">Chat</string>
     <string name="label">MyCompany</string>
     <string name="middlename">Отчество</string>
     <string name="firstname">Имя</string>
     <string name="lastname">Фамилия</string>
     <string name="change_password">Изменить пароль</string>
     <string name="password">Password</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="email">Email</string>
     <string name="logout">Выйти</string>
     <string name="change_user_data">Изменить данные</string>
     <string name="phone_number">Номер</string>
@@ -25,5 +34,12 @@
     <string name="create_chat">Создать чат</string>
     <string name="name_of_chat">Введите название чата</string>
     <string name="users_count">Users count</string>
+    <string name="chat_name">Chat name</string>
     <string name="add_user">Добавить пользователя</string>
+    <string name="responsible">Исполнитель</string>
+    <string name="deadline">Дедлайн</string>
+    <string name="priority">Приоритет</string>
+    <string name="status">Статус</string>
+    <string name="listOfTasks">Список задач</string>
+    <string name="addTask">Добавить задачу</string>
 </resources>
