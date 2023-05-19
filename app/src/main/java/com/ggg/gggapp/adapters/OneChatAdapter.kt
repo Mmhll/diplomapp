@@ -1,6 +1,5 @@
 package com.ggg.gggapp.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ class OneChatAdapter(private val id: Long) : RecyclerView.Adapter<RecyclerView.V
 
 
     override fun getItemViewType(position: Int): Int {
-        Log.e("TAG", chatMessages[position].id.toString() + " $id")
         return if (chatMessages[position].user.id == id) 2 else 1
     }
 

@@ -34,4 +34,5 @@
     <string name="name_of_chat">Введите название чата</string>
     <string name="users_count">Users count</string>
     <string name="chat_name">Chat name</string>
+    <string name="add_user">Добавить пользователя</string>
 </resources>

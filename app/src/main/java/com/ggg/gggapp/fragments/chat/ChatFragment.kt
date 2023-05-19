@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.ggg.gggapp.R
 import com.ggg.gggapp.adapters.ChatAdapter
 import com.ggg.gggapp.databinding.FragmentChatBinding
@@ -53,7 +52,7 @@ class ChatFragment : Fragment() {
                     })
                 }
                 ApiStatus.FAILED -> {
-                    Log.e("Error", "hmm")
+                    Log.e("Error", "Something went wrong")
                 }
                 else -> {
 
@@ -70,7 +69,7 @@ class ChatFragment : Fragment() {
                         adapter.setChats(viewModel.chats.value!!)
                     }
                     ApiStatus.FAILED -> {
-                        Log.e("Error", "hmm")
+                        Log.e("Error", "Something")
                     }
                     else -> {
 

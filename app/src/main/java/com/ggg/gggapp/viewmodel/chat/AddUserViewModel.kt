@@ -44,7 +44,7 @@ class AddUserViewModel @Inject constructor(
     fun addUser(token: String, user_ids: ArrayList<Long>, chat_id: Long){
         viewModelScope.launch {
             _chatStatus.value = ApiStatus.LOADING
-            /*try {*/
+            try {
                 for (i in user_ids){
                     chatRepository.addMember(token, chat_id, i).collect { messageResponse ->
                         if (messageResponse.message != "User was added") {
@@ -59,9 +59,9 @@ class AddUserViewModel @Inject constructor(
                 if (_internalStatus.value != ApiStatus.FAILED){
                     _chatStatus.value = ApiStatus.COMPLETE
                 }
-            /*} catch (e: HttpException) {
+            } catch (e: HttpException) {
                 _chatStatus.value = ApiStatus.FAILED
-            }*/
+            }
         }
     }
 }

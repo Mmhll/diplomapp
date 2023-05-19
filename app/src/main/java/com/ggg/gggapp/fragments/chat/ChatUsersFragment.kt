@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ggg.gggapp.R
@@ -14,6 +15,7 @@ import com.ggg.gggapp.adapters.ChatUserAdapter
 import com.ggg.gggapp.databinding.FragmentChatUsersBinding
 import com.ggg.gggapp.utils.ApiStatus
 import com.ggg.gggapp.viewmodel.chat.ChatUsersViewModel
+import com.ggg.gggapp.viewmodel.common.CommonChatViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +24,7 @@ class ChatUsersFragment : Fragment() {
 
     private var _binding: FragmentChatUsersBinding? = null
     private val binding get() = _binding!!
+    private val commonViewModel by activityViewModels<CommonChatViewModel>()
 
     private val viewModel by viewModels<ChatUsersViewModel>()
 
@@ -45,7 +48,9 @@ class ChatUsersFragment : Fragment() {
         viewModel.status.observe(viewLifecycleOwner) {
             when (it) {
                 ApiStatus.COMPLETE -> {
-                    val users = viewModel.chat.value!!.users
+                    val chat = viewModel.chat.value!!
+                    commonViewModel.chat.value = chat
+                    val users = chat.users
                     adapter.setUsers(users.toMutableList())
                 }
                 ApiStatus.FAILED -> {

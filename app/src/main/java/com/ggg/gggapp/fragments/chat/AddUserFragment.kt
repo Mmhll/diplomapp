@@ -43,14 +43,16 @@ class AddUserFragment : Fragment() {
         val adapter = UserAdapter(requireContext())
         binding.createChatUserRecyclerView.adapter = adapter
         viewModel.getUsers(token)
-        viewModel.userStatus.observe(viewLifecycleOwner){ status ->
-            when (status){
+        viewModel.userStatus.observe(viewLifecycleOwner) { status ->
+            when (status) {
                 ApiStatus.COMPLETE -> {
-                    val chatUsers = commonViewModel.chat.value!!.users
-                    if (chatUsers.isNotEmpty()) {
-                        val users = viewModel.users.value!!
-                        users.removeAll(chatUsers.toSet())
-                        adapter.setUsers(users)
+                    commonViewModel.chat.observe(viewLifecycleOwner) {
+                        val chatUsers = it.users
+                        if (chatUsers.isNotEmpty()) {
+                            val users = viewModel.users.value!!
+                            users.removeAll(chatUsers.toSet())
+                            adapter.setUsers(users)
+                        }
                     }
                 }
                 else -> {}
@@ -64,16 +66,17 @@ class AddUserFragment : Fragment() {
                     when (it) {
                         ApiStatus.COMPLETE -> {
                             userIds.forEach {
-                                commonViewModel.chat.value!!.users.removeIf { user -> user.id == it}
+                                viewModel.users.value!!.removeIf { user -> user.id != it }
                             }
+                            commonViewModel.chat.value!!.users.addAll(viewModel.users.value!!)
                             AlertDialog.Builder(requireContext())
                                 .setTitle("Успешно")
                                 .setMessage("Выбранные пользователи были добавлены")
                                 .setPositiveButton("Ok") { _, _ ->
-                                    findNavController().navigateUp()
+                                    findNavController().popBackStack()
                                 }
-                                .setOnCancelListener{
-                                    findNavController().navigateUp()
+                                .setOnCancelListener {
+                                    findNavController().popBackStack()
                                 }
                                 .create()
                                 .show()
