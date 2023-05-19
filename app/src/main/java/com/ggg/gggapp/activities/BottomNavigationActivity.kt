@@ -1,12 +1,15 @@
 package com.ggg.gggapp.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.removeItemAt
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ggg.gggapp.R
 import com.ggg.gggapp.databinding.ActivityBottomNavigationBinding
+import com.ggg.gggapp.utils.JWTParser
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,21 +30,24 @@ class BottomNavigationActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.navigation_chat -> {
-                    showBottomNav()
-                }
-                R.id.navigation_profile -> {
-                    showBottomNav()
-                }
-                R.id.navigation_news -> {
-                    showBottomNav()
-                }
-                R.id.navigation_services -> {
+                R.id.navigation_chat, R.id.navigation_profile, R.id.navigation_news, R.id.navigation_services -> {
                     showBottomNav()
                 }
                 else -> {
                     hideBottomNav()
                 }
+            }
+        }
+        val sharedPrefs = getSharedPreferences("token", Context.MODE_PRIVATE)
+        val token = sharedPrefs.getString("token", "")!!
+        val jwtParser = JWTParser(token)
+
+        when(jwtParser.getClaimString("permission")){
+            "ROLE_USER", "ROlE_EDITUSER" -> {
+                navView?.menu?.removeItemAt(0)
+            }
+            else ->{
+
             }
         }
 
