@@ -1,7 +1,6 @@
 package com.ggg.gggapp.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,27 +8,21 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ggg.gggapp.R
 import com.ggg.gggapp.model.Chat
-import dagger.hilt.android.qualifiers.ApplicationContext
 
 class ChatAdapter(val context: Context) :
     RecyclerView.Adapter<ChatAdapter.VH>() {
 
     private var chats: MutableList<Chat> = ArrayList()
 
-    private lateinit var myListener: onItemClickListener
+    private lateinit var myListener: OnItemClickListener
 
-    //Добавление интерфейса для клика на элемент recyclerView
-    interface onItemClickListener {
-        fun onItemClick(position: Int)
-    }
 
-    //Инициализация слушателя для клика внутри recyclerViewAdapter, передаётся из внешнего файла (activity)
-    fun setOnItemClickListener(listener: onItemClickListener) {
+    fun setOnItemClickListener(listener: OnItemClickListener) {
         myListener = listener
     }
 
 
-    class VH(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView) {
+    class VH(itemView: View, listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
         var chatName: TextView = itemView.findViewById(R.id.chatName)
         var message: TextView = itemView.findViewById(R.id.messageText)
         var initials: TextView = itemView.findViewById(R.id.messageName)

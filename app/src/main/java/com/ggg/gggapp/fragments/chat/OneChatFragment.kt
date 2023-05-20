@@ -15,7 +15,7 @@ import com.ggg.gggapp.adapters.OneChatAdapter
 import com.ggg.gggapp.databinding.FragmentOneChatBinding
 import com.ggg.gggapp.utils.ApiStatus
 import com.ggg.gggapp.utils.JWTParser
-import com.ggg.gggapp.utils.getEnding
+import com.ggg.gggapp.utils.generateEnding
 import com.ggg.gggapp.viewmodel.chat.OneChatViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -56,7 +56,7 @@ class OneChatFragment : Fragment() {
                     val chat = viewModel.chat.value!!
                     binding.oneChatName.text = chat.title
                     val userCount = chat.users.size
-                    val oneChatCountText = "$userCount участник${getEnding(userCount)}"
+                    val oneChatCountText = "$userCount участник${generateEnding(userCount)}"
                     binding.oneChatCount.text = oneChatCountText
                     val data = chat.messages
                     if (adapter.getMessages() != data.toMutableList()) {

@@ -25,19 +25,4 @@ class AuthorizationModule {
     @Named("authenticationRepository")
     fun provideRepository(@Named("authenticationService") service: AuthenticationService): AuthRepository =
         AuthRepository(service)
-
-
-    // Получение токена из хранилища SharedPreference
-/*    @Provides
-    @Named("Token")
-    fun provideGetToken(@ApplicationContext context : Context) : String {
-        var token = ""
-        while(token == ""){
-            token = context
-                .getSharedPreferences("settings", Context.MODE_PRIVATE)
-                .getString("token", "")
-                .toString()
-        }
-        return token
-    }*/
 }

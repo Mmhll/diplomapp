@@ -38,8 +38,12 @@
     <string name="add_user">Добавить пользователя</string>
     <string name="responsible">Исполнитель</string>
     <string name="deadline">Дедлайн</string>
-    <string name="priority">Приоритет</string>
     <string name="status">Статус</string>
     <string name="listOfTasks">Список задач</string>
     <string name="addTask">Добавить задачу</string>
+    <string name="creator">Постановщик</string>
+    <string name="creation_date">Дата создания:</string>
+    <string name="editStatus">Сменить статус</string>
+    <string name="change">Изменить</string>
+    <string name="delete">Удалить</string>
 </resources>

@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.ggg.gggapp.R
 import com.ggg.gggapp.adapters.ChatAdapter
+import com.ggg.gggapp.adapters.OnItemClickListener
 import com.ggg.gggapp.databinding.FragmentChatBinding
 import com.ggg.gggapp.utils.ApiStatus
 import com.ggg.gggapp.utils.JWTParser
@@ -37,13 +38,13 @@ class ChatFragment : Fragment() {
         val jwtParser = JWTParser(token)
         val id = jwtParser.getId()
         val adapter = ChatAdapter(requireContext())
-        viewModel.getChats("Bearer $token", id)
+        viewModel.getChats(token, id)
         viewModel.status.observe(viewLifecycleOwner){
             when (it){
                 ApiStatus.COMPLETE -> {
                     binding.recyclerChat.adapter = adapter
                     adapter.setChats(viewModel.chats.value!!)
-                    adapter.setOnItemClickListener(object: ChatAdapter.onItemClickListener{
+                    adapter.setOnItemClickListener(object: OnItemClickListener{
                         override fun onItemClick(position: Int) {
                             requireActivity().getSharedPreferences("chat_id", Context.MODE_PRIVATE).edit().putLong(
                                 "id", viewModel.chats.value!![position].id).apply()

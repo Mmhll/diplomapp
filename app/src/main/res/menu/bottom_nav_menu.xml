@@ -7,7 +7,7 @@
         android:title="Службы" />
 
     <item
-        android:id="@+id/navigation_news"
+        android:id="@+id/navigation_task"
         android:icon="@drawable/task_img"
         android:title="Задачи" />
 

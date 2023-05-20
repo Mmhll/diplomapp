@@ -12,10 +12,13 @@
         tools:layout="@layout/fragment_services" />
 
     <fragment
-        android:id="@+id/navigation_news"
+        android:id="@+id/navigation_task"
         android:name="com.ggg.gggapp.fragments.tasks.TasksFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_task" />
+        tools:layout="@layout/fragment_task" >
+        <action
+            android:id="@+id/action_navigation_task_to_oneTaskFragment"
+            app:destination="@id/oneTaskFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
@@ -78,4 +81,9 @@
         android:name="com.ggg.gggapp.fragments.chat.AddUserFragment"
         android:label="fragment_add_user"
         tools:layout="@layout/fragment_add_user" />
+    <fragment
+        android:id="@+id/oneTaskFragment"
+        android:name="com.ggg.gggapp.fragments.tasks.OneTaskFragment"
+        android:label="fragment_one_task"
+        tools:layout="@layout/fragment_one_task" />
 </navigation>

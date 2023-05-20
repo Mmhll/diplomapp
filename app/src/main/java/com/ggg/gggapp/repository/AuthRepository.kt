@@ -5,6 +5,7 @@ import com.ggg.gggapp.remote_model.AuthenticationResponse
 import com.ggg.gggapp.remote_model.MessageResponse
 import com.ggg.gggapp.remote_model.RegisterUserRequest
 import com.ggg.gggapp.service.AuthenticationService
+import com.ggg.gggapp.utils.generateToken
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -21,7 +22,7 @@ class AuthRepository @Inject constructor(@Named("authenticationService") val ser
 
     fun register(token: String, email: String, password: String, firstname: String, lastname: String, middlename: String, phoneNumber: String): Flow<MessageResponse>{
         return flow {
-            emit(service.register(token = "Bearer $token", RegisterUserRequest(email, firstname, lastname, middlename, password, phoneNumber)))
+            emit(service.register(generateToken(token), RegisterUserRequest(email, firstname, lastname, middlename, password, phoneNumber)))
         }
     }
 }

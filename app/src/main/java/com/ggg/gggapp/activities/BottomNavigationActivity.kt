@@ -30,7 +30,7 @@ class BottomNavigationActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.navigation_chat, R.id.navigation_profile, R.id.navigation_news, R.id.navigation_services -> {
+                R.id.navigation_chat, R.id.navigation_profile, R.id.navigation_task, R.id.navigation_services -> {
                     showBottomNav()
                 }
                 else -> {

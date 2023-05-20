@@ -9,9 +9,16 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
+data class Smth(
+    val id1: Int,
+    val id2: Int,
+)
+
 class ExampleUnitTest {
+
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        val list = arrayListOf(Smth(5,1), Smth(3,1), Smth(3,2))
+        println(list.sortedWith(compareByDescending<Smth> { smth -> smth.id1 }.thenByDescending { smth-> smth.id2 }))
     }
 }
