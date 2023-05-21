@@ -52,7 +52,7 @@ class TasksFragment : Fragment() {
         val recyclerAdapter = TaskAdapter(requireContext())
         recyclerAdapter.setOnItemClickListener(object: OnItemClickListener{
             override fun onItemClick(position: Int) {
-                commonViewModel.task.value = viewModel.tasks.value!![position]
+                commonViewModel.task.value = viewModel.tasks.value!![position].id
                 findNavController().navigate(R.id.action_navigation_task_to_oneTaskFragment)
             }
         })
@@ -86,7 +86,6 @@ class TasksFragment : Fragment() {
         viewModel.taskStatus.observe(viewLifecycleOwner) {
             when (it) {
                 ApiStatus.COMPLETE -> {
-                    Log.e("TAG", viewModel.tasks.value!!.toString())
                     recyclerAdapter.setTasks(viewModel.tasks.value!!)
                 }
                 else -> {

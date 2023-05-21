@@ -8,6 +8,6 @@ data class Task(
     val status: String,
     val executor: User,
     val id: Long,
-    val members: List<User>,
+    val members: ArrayList<User>,
     val name: String
 )

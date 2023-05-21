@@ -1,5 +1,7 @@
 package com.ggg.gggapp.utils
 
+import com.ggg.gggapp.model.UserData
+
 fun generateEnding(count: Int): String {
     val countString = count.toString()
     return when (countString.last()) {
@@ -19,9 +21,8 @@ fun generateToken(token: String): String{
     return "Bearer $token"
 }
 
-fun generateInitials(secondName: String, firstName: String, middleName: String): String{
-
-    return "${lastnameUppercase(secondName)} ${firstToUppercase(firstName)} ${firstToUppercase(middleName)}"
+fun generateInitials(user: UserData): String{
+    return "${lastnameUppercase(user.lastname)} ${firstToUppercase(user.firstname)} ${firstToUppercase(user.middlename)}"
 }
 
 private fun firstToUppercase(string: String): String{

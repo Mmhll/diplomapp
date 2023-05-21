@@ -45,6 +45,10 @@
     <string name="editStatus">Сменить статус</string>
     <string name="change">Изменить</string>
     <string name="delete">Удалить</string>
+    <string name="members">Участники:</string>
+    <string name="update_members">Изменить пользователей</string>
+    <string name="delete_members">Удалить</string>
+    <string name="add_members">Добавить пользователей</string>
 
 
 </resources>

@@ -51,7 +51,7 @@
                     android:layout_marginRight="10dp"
                     android:textAlignment="center"
                     android:textColor="?attr/colorSecondary"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/header" />
@@ -61,31 +61,44 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="30dp"
+                    android:paddingTop="30dp"
                     android:text="@string/creator"
                     android:textColor="?attr/colorSecondary"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/description" />
 
                 <TextView
-                    android:id="@+id/responsible"
+                    android:id="@+id/taskExecutor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="30dp"
+                    android:paddingTop="30dp"
                     android:text="@string/responsible"
                     android:textColor="?attr/colorSecondary"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/dateOfCreation" />
+                <TextView
+                    android:id="@+id/taskMembers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:paddingTop="30dp"
+                    android:text="@string/members"
+                    android:textColor="?attr/colorSecondary"
+                    android:textSize="20sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/taskExecutor" />
 
                 <Spinner
                     android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingStart="30dp"
+                    android:backgroundTint="@color/white"
+                    android:textSize="20sp"
                     android:layout_marginTop="30dp"
-                    android:textSize="25sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/deadline" />
@@ -94,11 +107,11 @@
                     android:id="@+id/dateOfCreation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:paddingTop="30dp"
                     android:layout_marginEnd="10dp"
                     android:text="@string/creation_date"
                     android:textColor="?attr/colorSecondary"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/owner" />
 
@@ -106,51 +119,78 @@
                     android:id="@+id/deadline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="10dp"
                     android:text="@string/deadline"
                     android:textColor="?attr/colorSecondary"
-                    android:textSize="25sp"
+                    android:paddingTop="30dp"
+                    android:textSize="20sp"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/responsible" />
+                    app:layout_constraintTop_toBottomOf="@+id/taskMembers" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/editStatusButton"
-            android:text="@string/editStatus"
-            android:textSize="20sp"
-            android:textColor="?attr/colorSecondary"
-            android:textAllCaps="false"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginHorizontal="40dp"
-            android:background="@drawable/conner"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/editTaskButton"
-            app:layout_constraintTop_toBottomOf="@id/cardView"
-            app:layout_constraintRight_toRightOf="parent"/>
-
-        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/editTaskButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
-            android:layout_marginTop="50dp"
             android:background="@drawable/conner"
             android:text="@string/change"
             android:textAllCaps="false"
+            android:layout_marginTop="30dp"
             android:textColor="?attr/colorSecondary"
             android:textSize="20sp"
             android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/deleteButton"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toBottomOf="@id/cardView"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editStatusButton" />
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/editExecutorButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="40dp"
+            android:background="@drawable/conner"
+            android:text="@string/change"
+            android:textAllCaps="false"
+            android:layout_marginTop="30dp"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/editTaskButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/membersLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/editExecutorButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addMembersButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/conner"
+            android:layout_weight="0.45"
+            android:text="@string/delete_members"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="18sp"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/deleteMembersButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.45"
+            android:background="@drawable/conner"
+            android:text="@string/add_members"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorSecondary"
+            android:textSize="16sp"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/deleteButton"
@@ -166,7 +206,7 @@
             android:background="@drawable/conner"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTaskButton"/>
+            app:layout_constraintTop_toBottomOf="@id/membersLinear"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

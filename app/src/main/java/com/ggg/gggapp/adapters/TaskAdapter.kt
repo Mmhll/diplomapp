@@ -18,7 +18,9 @@ class TaskAdapter(private val context: Context) :
     fun setOnItemClickListener(listener: OnItemClickListener) {
         myListener = listener
     }
-    class TaskViewHolder (listener: OnItemClickListener, itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    class TaskViewHolder(listener: OnItemClickListener, itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
         var header: TextView? = null
         var creator: TextView? = null
         var executor: TextView? = null
@@ -49,16 +51,16 @@ class TaskAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         if (tasks.size != 0) {
-            tasks.sortedWith(compareByDescending<Task> { task -> task.creation_date}.thenByDescending { task -> task.date_of_update })
+            tasks.sortedWith(compareByDescending<Task> { task -> task.creation_date }.thenByDescending { task -> task.date_of_update })
             val userDataCreator = tasks[position].creator.userData
             val userDataExecutor = tasks[position].executor.userData
-            val creator = "Постановщик:  ${generateInitials(userDataCreator.lastname, userDataCreator.firstname, userDataCreator.middlename)}"
-            val executor = "Исполнитель: ${generateInitials(userDataExecutor.lastname, userDataExecutor.firstname, userDataExecutor.middlename)}"
+            val creator = "Постановщик:  ${generateInitials(userDataCreator)}"
+            val executor = "Исполнитель: ${generateInitials(userDataExecutor)}"
             holder.creator?.text = creator
             holder.executor?.text = executor
             holder.deadline?.text = tasks[position].deadline
             holder.status?.text = tasks[position].status
-            holder.updatedAt?.text = if (tasks[position].date_of_update.isNullOrEmpty()){
+            holder.updatedAt?.text = if (tasks[position].date_of_update.isNullOrEmpty()) {
                 tasks[position].creation_date
             } else {
                 tasks[position].date_of_update
