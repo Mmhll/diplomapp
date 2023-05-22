@@ -89,14 +89,18 @@
         <action
             android:id="@+id/action_oneTaskFragment_to_addAndRemoveMembersFragment"
             app:destination="@id/addAndRemoveMembersFragment" />
+        <action
+            android:id="@+id/action_oneTaskFragment_to_editTaskFragment"
+            app:destination="@id/editTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAndRemoveMembersFragment"
         android:name="com.ggg.gggapp.fragments.tasks.AddAndRemoveMembersFragment"
         android:label="fragment_add_and_remove_members"
-        tools:layout="@layout/fragment_add_and_remove_members" >
-        <action
-            android:id="@+id/action_addAndRemoveMembersFragment_to_oneTaskFragment"
-            app:destination="@id/oneTaskFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_add_and_remove_members" />
+    <fragment
+        android:id="@+id/editTaskFragment"
+        android:name="com.ggg.gggapp.fragments.tasks.EditTaskFragment"
+        android:label="fragment_edit_task"
+        tools:layout="@layout/fragment_edit_task" />
 </navigation>

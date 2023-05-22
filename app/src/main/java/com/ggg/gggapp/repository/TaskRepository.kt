@@ -86,7 +86,7 @@ class TaskRepository @Inject constructor(@Named("taskService") val service: Task
 
     fun addMember(token: String, user_id: Long, task_id: Long): Flow<MessageResponse> {
         return flow {
-            emit(service.addMember(token, UserAndTaskRequest(task_id, user_id)))
+            emit(service.addMember(generateToken(token), UserAndTaskRequest(task_id, user_id)))
         }
     }
 

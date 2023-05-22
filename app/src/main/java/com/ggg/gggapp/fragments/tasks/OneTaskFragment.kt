@@ -79,6 +79,8 @@ class OneTaskFragment : Fragment() {
                 binding.taskMembers.text = members
                 binding.deadline.text = deadline
                 binding.dateOfCreation.text = created
+                binding.header.text = task.name
+                binding.description.text = task.description
 
                 binding.status.setSelection(spinnerItems.indexOf(task.status))
             }
@@ -123,6 +125,12 @@ class OneTaskFragment : Fragment() {
                 commonViewModel.users.value = viewModel.task.value!!.members
                 commonViewModel.isDeleteAction = true
                 findNavController().navigate(R.id.action_oneTaskFragment_to_addAndRemoveMembersFragment)
+            }
+        }
+        binding.editTaskButton.setOnClickListener {
+            if (viewModel.taskStatus.value == ApiStatus.COMPLETE){
+                commonViewModel.fullTask.value = viewModel.task.value
+                findNavController().navigate(R.id.action_oneTaskFragment_to_editTaskFragment)
             }
         }
     }

@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="35dp"
-        android:background="@drawable/conner"
+        android:background="@drawable/corner"
         android:text="@string/register"
         android:textAllCaps="false"
         android:textColor="@color/white" />

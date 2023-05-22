@@ -1,5 +1,6 @@
 package com.ggg.gggapp.viewmodel.tasks
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -40,26 +41,13 @@ class AddAndRemoveMembersViewModel @Inject constructor(
     val userStatus: LiveData<ApiStatus> get() = _userStatus
 
 
-    fun getTask(token: String, taskId: Long) {
-        viewModelScope.launch {
-            _taskStatus.value = ApiStatus.LOADING
-            try {
-                taskRepository.getTask(token, taskId).collect {
-                    _task.value = it
-                    _taskStatus.value = ApiStatus.COMPLETE
-                }
-            } catch (e: HttpException) {
-                _taskStatus.value = ApiStatus.FAILED
-            }
-        }
-    }
-
     fun addMembers(token: String, taskId: Long, membersIds: ArrayList<Long>) {
         viewModelScope.launch {
             _apiStatus.value = ApiStatus.LOADING
             try {
                 for (i in membersIds) {
-                    taskRepository.addMember(token, taskId, i).collect { messageResponse ->
+                    taskRepository.addMember(token, i, taskId).collect { messageResponse ->
+                        Log.e("MESSAGE", messageResponse.message)
                         if (messageResponse.message != "User was added to task") {
                             _internalStatus.value = ApiStatus.FAILED
                         }
@@ -82,8 +70,11 @@ class AddAndRemoveMembersViewModel @Inject constructor(
         viewModelScope.launch {
             _apiStatus.value = ApiStatus.LOADING
             try {
+                Log.e("TASK_ID", taskId.toString())
+                Log.e("USER_IDS", membersIds.toString())
                 for (i in membersIds) {
-                    taskRepository.deleteMember(token, taskId, i).collect { messageResponse ->
+                    taskRepository.deleteMember(token, i, taskId).collect { messageResponse ->
+                        Log.e("MESSAGE", messageResponse.message)
                         if (messageResponse.message != "User was deleted from task") {
                             _internalDeleteStatus.value = ApiStatus.FAILED
                         }

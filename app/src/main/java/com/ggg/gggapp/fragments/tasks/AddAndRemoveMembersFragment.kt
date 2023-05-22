@@ -2,15 +2,14 @@ package com.ggg.gggapp.fragments.tasks
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.ggg.gggapp.R
 import com.ggg.gggapp.adapters.UserAdapter
 import com.ggg.gggapp.databinding.FragmentAddAndRemoveMembersBinding
 import com.ggg.gggapp.model.User
@@ -65,7 +64,8 @@ class AddAndRemoveMembersFragment : Fragment() {
             viewModel.apiStatus.observe(viewLifecycleOwner){
                 if (it == ApiStatus.COMPLETE){
                     findNavController().popBackStack()
-                    findNavController().navigate(R.id.action_addAndRemoveMembersFragment_to_oneTaskFragment)
+                } else {
+                    Log.e("ERROR", it.toString())
                 }
             }
         }

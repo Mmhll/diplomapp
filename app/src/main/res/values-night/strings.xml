@@ -50,4 +50,5 @@
     <string name="update_members">Изменить пользователей</string>
     <string name="delete_members">Удалить</string>
     <string name="add_members">Добавить пользователей</string>
+    <string name="change_task">Изменить задачу</string>
 </resources>

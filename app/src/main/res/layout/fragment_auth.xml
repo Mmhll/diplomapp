@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/auth_button"
             android:layout_gravity="center"
-            android:background="@drawable/conner"
+            android:background="@drawable/corner"
             android:layout_marginTop="20dp"
             android:text="Авторизация"
             android:textColor="@color/white"

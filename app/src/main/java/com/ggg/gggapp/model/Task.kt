@@ -5,6 +5,7 @@ data class Task(
     val creator: User,
     val date_of_update: String,
     val deadline: String,
+    val description: String,
     val status: String,
     val executor: User,
     val id: Long,

@@ -156,7 +156,7 @@
         android:layout_gravity="center"
         android:textAllCaps="false"
         android:layout_marginTop="35dp"
-        android:background="@drawable/conner"
+        android:background="@drawable/corner"
         android:text="@string/register"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent" />
@@ -168,7 +168,7 @@
         android:layout_gravity="center"
         android:textAllCaps="false"
         android:layout_marginTop="35dp"
-        android:background="@drawable/conner"
+        android:background="@drawable/corner"
         android:text="@string/change_user_data"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent" />
@@ -180,7 +180,7 @@
         android:layout_gravity="center"
         android:textAllCaps="false"
         android:layout_marginTop="35dp"
-        android:background="@drawable/conner"
+        android:background="@drawable/corner"
         android:text="@string/change_password"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent" />
@@ -192,7 +192,7 @@
         android:layout_gravity="center"
         android:textAllCaps="false"
         android:layout_marginTop="35dp"
-        android:background="@drawable/conner"
+        android:background="@drawable/corner"
         android:text="@string/logout"
         android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent" />
