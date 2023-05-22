@@ -51,11 +51,12 @@ class TaskAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         if (tasks.size != 0) {
-            tasks.sortedWith(compareByDescending<Task> { task -> task.creation_date }.thenByDescending { task -> task.date_of_update })
+            tasks.sortedWith(compareByDescending<Task> { task -> task.date_of_update }.thenByDescending { task -> task.creation_date })
             val userDataCreator = tasks[position].creator.userData
             val userDataExecutor = tasks[position].executor.userData
             val creator = "Постановщик:  ${generateInitials(userDataCreator)}"
             val executor = "Исполнитель: ${generateInitials(userDataExecutor)}"
+            holder.header?.text = tasks[position].name
             holder.creator?.text = creator
             holder.executor?.text = executor
             holder.deadline?.text = tasks[position].deadline

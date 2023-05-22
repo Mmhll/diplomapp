@@ -1,13 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:layout_gravity="center"
     tools:context=".fragments.tasks.CreateTaskFragment">
 
-    <TextView
+    <EditText
+        android:id="@+id/taskNameInput"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:hint="@string/hint_task_name"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/taskDescriptionInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/description_hint"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/taskNameInput" />
+
+    <EditText
+        android:id="@+id/task_deadline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/deadline_hint"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/taskDescriptionInput" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/taskExecutorLinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/task_deadline">
+
+        <TextView
+            android:id="@+id/taskExecutorText"
+            android:layout_width="match_parent"
+            android:layout_weight="0.2"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/taskExecutorButton"
+            android:layout_width="match_parent"
+            android:layout_weight="0.8"
+            android:text="@string/add_executor"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:background="@drawable/corner"
+            android:layout_height="wrap_content" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/taskMembersLinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/taskExecutorLinear">
+
+        <TextView
+            android:id="@+id/taskMembersText"
+            android:layout_width="match_parent"
+            android:textColor="@color/black"
+            android:layout_weight="0.2"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/taskMembersButton"
+            android:layout_width="match_parent"
+            android:layout_weight="0.8"
+            android:text="@string/add_members"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="10.8sp"
+            android:background="@drawable/corner"
+            android:layout_height="wrap_content" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

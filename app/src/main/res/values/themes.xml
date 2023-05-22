@@ -20,5 +20,14 @@
     </style>
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/blue</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DatePickerTheme.ButtonBarPositiveButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/DatePickerTheme.ButtonBarNegativeButtonStyle</item>
+    </style>
+
+    <style name="DatePickerTheme.ButtonBarNegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+    <style name="DatePickerTheme.ButtonBarPositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/blue</item>
     </style>
 </resources>

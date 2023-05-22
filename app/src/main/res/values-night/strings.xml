@@ -51,4 +51,8 @@
     <string name="delete_members">Удалить</string>
     <string name="add_members">Добавить пользователей</string>
     <string name="change_task">Изменить задачу</string>
+    <string name="add_executor">Добавить исполнителя</string>
+    <string name="description_hint">Введите описание задачи</string>
+    <string name="hint_task_name">Введите название задачи</string>
+    <string name="deadline_hint">Выберите дату дедлайна</string>
 </resources>

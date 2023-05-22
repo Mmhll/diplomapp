@@ -2,7 +2,6 @@ package com.ggg.gggapp.fragments.tasks
 
 import android.app.DatePickerDialog
 import android.content.Context
-import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.ggg.gggapp.R
 import com.ggg.gggapp.databinding.FragmentEditTaskBinding
 import com.ggg.gggapp.utils.ApiStatus
+import com.ggg.gggapp.utils.getCurrentDate
 import com.ggg.gggapp.viewmodel.common.CommonTaskViewModel
 import com.ggg.gggapp.viewmodel.tasks.EditTaskViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,24 +44,23 @@ class EditTaskFragment : Fragment() {
         binding.headerInput.setText(commonViewModel.fullTask.value!!.name)
         binding.descriptionInput.setText(commonViewModel.fullTask.value!!.description)
         binding.deadlineInput.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val date = arrayOf(
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-            DatePickerDialog(
+            val date = getCurrentDate()
+            val datePickerDialog = DatePickerDialog(
                 requireContext(),
                 R.style.DialogTheme,
                 { _, year, monthOfYear, dayOfMonth ->
-                    val pickedDate = (dayOfMonth.toString() + "-" + (monthOfYear + 1) + "-" + year)
+                    val pickedDate = ("$year-${monthOfYear + 1}-${dayOfMonth}")
                     binding.deadlineInput.setText(pickedDate)
                 },
                 date[0],
                 date[1],
                 date[2]
+            )
+            datePickerDialog.show()
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(resources.getColor(
+                R.color.blue, requireContext().theme))
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(resources.getColor(android.R.color.holo_red_light, requireContext().theme))
 
-            ).show()
         }
         binding.editTaskEditButton.setOnClickListener {
             val deadline = binding.deadlineInput.text.toString()

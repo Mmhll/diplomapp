@@ -37,6 +37,8 @@ class BottomNavigationActivity : AppCompatActivity() {
                     hideBottomNav()
                 }
             }
+            val arrayList = arrayListOf<Long>()
+            arrayList.addAll(arrayListOf(1L,2L,3L))
         }
         val sharedPrefs = getSharedPreferences("token", Context.MODE_PRIVATE)
         val token = sharedPrefs.getString("token", "")!!
