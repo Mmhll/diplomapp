@@ -6,5 +6,5 @@ data class UpdateUserRequest(
     val firstname: String,
     val lastname: String,
     val middlename: String,
-    val username: String
+    val phone_number: String
 )

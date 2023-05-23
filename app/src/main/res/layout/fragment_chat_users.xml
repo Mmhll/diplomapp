@@ -7,10 +7,14 @@
     android:padding="16dp"
     tools:context=".fragments.chat.ChatUsersFragment">
 
-    <androidx.appcompat.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/usersAddUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/add_img"
+        android:background="@drawable/corner"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,6 +25,7 @@
         android:orientation="vertical"
         android:paddingVertical="20dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usersAddUserButton" />

@@ -66,13 +66,16 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addButton"
+        android:id="@+id/add_task_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="50dp"
-        android:backgroundTint="?attr/colorOnPrimary"
+        app:borderWidth="3dp"
+        android:backgroundTint="@color/blue"
         android:clickable="true"
+        app:tint="@android:color/white"
+        android:src="@drawable/add_img"
         android:contentDescription="@string/addTask"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

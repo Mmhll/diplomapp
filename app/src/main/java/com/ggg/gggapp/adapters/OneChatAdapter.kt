@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ggg.gggapp.R
 import com.ggg.gggapp.model.Message
+import com.ggg.gggapp.utils.makeDateTimeValid
 
 
 class OneChatAdapter(private val id: Long) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -59,11 +60,12 @@ class OneChatAdapter(private val id: Long) : RecyclerView.Adapter<RecyclerView.V
             val initials = "${message.user.userData.firstname} ${message.user.userData.lastname}"
             viewHolder.receiver.text = initials
             viewHolder.content.text = message.text
-            viewHolder.time.text = message.created_at
+            viewHolder.time.text = makeDateTimeValid(message.created_at)
         } else {
             val viewHolder: RightChatViewHolder = holder as RightChatViewHolder
             viewHolder.content.text = message.text
-            viewHolder.time.text = message.created_at
+            viewHolder.time.text = makeDateTimeValid(message.created_at)
+
         }
     }
 }

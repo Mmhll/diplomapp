@@ -9,10 +9,14 @@
     android:paddingHorizontal="16dp"
     tools:context=".fragments.chat.ChatFragment">
 
-    <androidx.appcompat.widget.AppCompatButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/createChatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/corner"
+        android:src="@drawable/create_chat"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -20,6 +24,7 @@
         android:id="@+id/swiperefresh"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/createChatButton">

@@ -54,6 +54,7 @@
     <string name="description_hint">Введите описание задачи</string>
     <string name="hint_task_name">Введите название задачи</string>
     <string name="deadline_hint">Выберите дату дедлайна</string>
+    <string name="choose_executor">Выберите исполнителя</string>
 
 
 </resources>

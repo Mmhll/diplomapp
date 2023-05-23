@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ggg.gggapp.R
 import com.ggg.gggapp.model.Chat
+import com.ggg.gggapp.utils.makeDateTimeValid
 
 class ChatAdapter(val context: Context) :
     RecyclerView.Adapter<ChatAdapter.VH>() {
@@ -44,12 +45,14 @@ class ChatAdapter(val context: Context) :
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         if (chats.isNotEmpty()) {
+
             chats.sortByDescending { it.updatedAt }
             if (chats[position].updatedAt == null) {
-                holder.time.text = chats[position].createdAt
+
+                holder.time.text = makeDateTimeValid(chats[position].createdAt)
                 holder.message.text = "Чат создан"
             } else {
-                holder.time.text = chats[position].updatedAt
+                holder.time.text = makeDateTimeValid(chats[position].updatedAt)
                 val message = chats[position].messages.last()
                 holder.message.text = message.text
                 val initials =

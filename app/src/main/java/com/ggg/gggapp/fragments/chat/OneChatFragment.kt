@@ -72,6 +72,7 @@ class OneChatFragment : Fragment() {
             val message = binding.newMessageInput.text.toString()
             Log.e("TAG", message)
             if (message.isNotEmpty()) {
+                binding.newMessageInput.text.clear()
                 viewModel.sendMessage(token, JWTParser(token).getId(), message, id)
                 viewModel.messageStatus.observe(viewLifecycleOwner){
                     when (it){
@@ -83,6 +84,9 @@ class OneChatFragment : Fragment() {
                     }
                 }
             }
+        }
+        binding.addChatMember.setOnClickListener {
+            findNavController().navigate(R.id.action_oneChatFragment_to_addUserFragment)
         }
         binding.linearChatUsersButton.setOnClickListener {
             findNavController().navigate(R.id.action_oneChatFragment_to_chatUsersFragment)

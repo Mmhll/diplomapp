@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_navigation_task_to_oneTaskFragment"
             app:destination="@id/oneTaskFragment" />
+        <action
+            android:id="@+id/action_navigation_task_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
     </fragment>
 
     <fragment
@@ -103,4 +106,9 @@
         android:name="com.ggg.gggapp.fragments.tasks.EditTaskFragment"
         android:label="fragment_edit_task"
         tools:layout="@layout/fragment_edit_task" />
+    <fragment
+        android:id="@+id/createTaskFragment"
+        android:name="com.ggg.gggapp.fragments.tasks.CreateTaskFragment"
+        android:label="fragment_create_task"
+        tools:layout="@layout/fragment_create_task" />
 </navigation>

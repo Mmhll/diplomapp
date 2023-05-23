@@ -2,7 +2,6 @@ package com.ggg.gggapp.fragments.tasks
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -44,11 +43,16 @@ class TasksFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val sharedPrefs = requireActivity().getSharedPreferences("token", Context.MODE_PRIVATE)
         val token = sharedPrefs.getString("token", "")!!
         val jwtParser = JWTParser(token)
+        val role = jwtParser.getClaimString("permission")
+        if (role == "ROLE_USER"){
+            binding.addTaskButton.visibility = View.GONE
+        }
         val recyclerAdapter = TaskAdapter(requireContext())
         recyclerAdapter.setOnItemClickListener(object: OnItemClickListener{
             override fun onItemClick(position: Int) {
@@ -93,8 +97,9 @@ class TasksFragment : Fragment() {
                 }
             }
         }
-
-
+        binding.addTaskButton.setOnClickListener{
+            findNavController().navigate(R.id.action_navigation_task_to_createTaskFragment)
+        }
     }
 
     override fun onDestroyView() {

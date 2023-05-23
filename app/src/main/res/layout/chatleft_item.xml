@@ -5,35 +5,43 @@
     android:layout_height="wrap_content"
     android:paddingTop="20dp">
 
-    <TextView
-        android:id="@+id/chatItem_left_receiver"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:text="@string/sample_receiver"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/chatItem_left_time"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/chatItem_left_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="7dp"
-        android:text="@string/sample_text"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatItem_left_receiver" />
-
-    <TextView
-        android:id="@+id/chatItem_left_time"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="2dp"
-        android:text="@string/sample_time"
-        android:textAlignment="textEnd"
-        android:textSize="12sp"
+        android:minWidth="200dp"
+        android:background="@drawable/corner_shape_strange"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatItem_left_text" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/chatItem_left_receiver"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="@string/sample_receiver"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/chatItem_left_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="7dp"
+            android:text="@string/sample_text"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chatItem_left_receiver" />
+
+        <TextView
+            android:id="@+id/chatItem_left_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="2dp"
+            android:text="@string/sample_time"
+            android:textAlignment="textEnd"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chatItem_left_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

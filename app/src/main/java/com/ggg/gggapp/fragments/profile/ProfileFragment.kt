@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.ggg.gggapp.remote_model.UpdatePasswordRequest
 import com.ggg.gggapp.remote_model.UpdateUserRequest
 import com.ggg.gggapp.utils.ApiStatus
 import com.ggg.gggapp.utils.JWTParser
+import com.ggg.gggapp.viewmodel.auth.AuthViewModel
 import com.ggg.gggapp.viewmodel.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,6 +31,7 @@ class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModels<ProfileViewModel>()
+    private val authViewModel by viewModels<AuthViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -42,28 +45,24 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val sharedPrefs = requireActivity().getSharedPreferences("token", Context.MODE_PRIVATE)
         val token = sharedPrefs.getString("token", "").toString()
-
+        var password = sharedPrefs.getString("password", "").toString()
         val jwtParser = JWTParser(token)
 
         val id = jwtParser.getId()
         val username = jwtParser.getSubject()
 
-        binding.emailProfile.setText(jwtParser.getClaimString("email"))
-        binding.phoneProfile.setText(jwtParser.getClaimString("phone_number"))
-        binding.firstnameProfile.setText(jwtParser.getClaimString("firstname"))
-        binding.lastnameProfile.setText(jwtParser.getClaimString("lastname"))
-        binding.middlenameProfile.setText(jwtParser.getClaimString("middlename"))
+        updateData(jwtParser)
 
 
         binding.changeButton.setOnClickListener {
             viewModel.setUserData(
                 token, UpdateUserRequest(
-                    id,
-                    binding.emailProfile.text.toString(),
-                    username,
-                    binding.firstnameProfile.text.toString(),
-                    binding.lastnameProfile.text.toString(),
-                    binding.middlenameProfile.text.toString(),
+                    id = id,
+                    email = binding.emailProfile.text.toString(),
+                    phone_number = binding.phoneProfile.text.toString(),
+                    firstname = binding.firstnameProfile.text.toString(),
+                    lastname = binding.lastnameProfile.text.toString(),
+                    middlename = binding.middlenameProfile.text.toString(),
                 )
             )
             viewModel.updateStatus.observe(viewLifecycleOwner) {
@@ -72,6 +71,16 @@ class ProfileFragment : Fragment() {
                         Toast.makeText(
                             requireContext(), "Данные успешно изменены", Toast.LENGTH_SHORT
                         ).show()
+                        Log.e("TAG", jwtParser.getSubject())
+                        authViewModel.authorize(jwtParser.getSubject(), password)
+                        authViewModel.status.observe(viewLifecycleOwner){ status ->
+                            if (status == ApiStatus.COMPLETE){
+                                sharedPrefs.edit().putString("token", authViewModel.data.value!!.token).apply()
+                                updateData(JWTParser(authViewModel.data.value!!.token))
+                                Log.e("TAG", "PIZDA")
+                            }
+
+                        }
                     }
                     ApiStatus.FAILED -> {
                         Toast.makeText(requireContext(), "Что-то пошло не так", Toast.LENGTH_SHORT)
@@ -97,6 +106,8 @@ class ProfileFragment : Fragment() {
                                     Toast.makeText(
                                         requireContext(), "Пароль изменён", Toast.LENGTH_SHORT
                                     ).show()
+                                    password = passwordText.text.toString()
+                                    sharedPrefs.edit().putString("password", password).apply()
                                 }
                                 ApiStatus.FAILED -> {
                                     Toast.makeText(
@@ -118,6 +129,14 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_profile_to_registrationFragment)
         }
 
+    }
+
+    private fun updateData(jwtParser: JWTParser){
+        binding.emailProfile.setText(jwtParser.getClaimString("email"))
+        binding.phoneProfile.setText(jwtParser.getClaimString("phone_number"))
+        binding.firstnameProfile.setText(jwtParser.getClaimString("firstname"))
+        binding.lastnameProfile.setText(jwtParser.getClaimString("lastname"))
+        binding.middlenameProfile.setText(jwtParser.getClaimString("middlename"))
     }
 
     override fun onDestroyView() {

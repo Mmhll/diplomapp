@@ -16,10 +16,6 @@ import javax.inject.Named
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(@Named("userRepository") private val repository: UserRepository) : ViewModel(){
-    private val _isDataUpdated : MutableLiveData<Boolean> = MutableLiveData()
-    val isDataUpdated get() = _isDataUpdated
-    private val _isPasswordUpdated : MutableLiveData<Boolean> = MutableLiveData()
-    val isPasswordUpdated get() = _isPasswordUpdated
     private val _updateStatus = MutableLiveData<ApiStatus>()
     val updateStatus : LiveData<ApiStatus>
         get() = _updateStatus

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:background="@color/grey_white"
     tools:context=".fragments.chat.OneChatFragment">
 
@@ -12,7 +11,10 @@
         android:id="@+id/linearLayoutCompat2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/corner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,13 +24,13 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:orientation="vertical"
-            android:background="@color/grey_white"
             android:layout_weight="0.15">
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/oneChatName"
                 android:layout_width="match_parent"
                 android:text="@string/chat_name"
                 android:gravity="center"
+                android:textColor="@color/white"
                 android:padding="5dp"
                 android:textSize="16sp"
                 android:layout_height="wrap_content"/>
@@ -39,17 +41,24 @@
                 android:padding="5dp"
                 android:textSize="12sp"
                 android:text="@string/users_count"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/addChatMember"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/grey_white"
+            android:src="@drawable/add_img"
+            android:foregroundTint="@color/black"
+            app:tint="@color/white"
+            android:background="@drawable/border"
             android:layout_weight="0.85"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingVertical="30dp"
+        android:paddingHorizontal="16dp"
         android:id="@+id/recyclerOneChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -64,6 +73,7 @@
         android:id="@+id/linearLayoutCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -72,12 +82,15 @@
             android:id="@+id/newMessageInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/black"
             android:layout_weight="0.2" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/sendMessageButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/corner"
+            android:src="@drawable/send_img"
             android:layout_weight="0.8" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

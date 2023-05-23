@@ -50,6 +50,7 @@ class AuthFragment : Fragment() {
                     when(it){
                         ApiStatus.COMPLETE -> {
                             prefs.edit().putString("token", viewModel.data.value!!.token).apply()
+                            prefs.edit().putString("password", binding.password.text.toString()).apply()
                             requireActivity().startActivity(Intent(requireActivity(),
                                 BottomNavigationActivity::class.java))
                             requireActivity().finish()
