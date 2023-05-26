@@ -92,4 +92,11 @@ class OneChatFragment : Fragment() {
             findNavController().navigate(R.id.action_oneChatFragment_to_chatUsersFragment)
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.clear()
+        Log.e("TAG", "Destroyed")
+        _binding = null
+    }
 }

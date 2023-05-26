@@ -1,6 +1,5 @@
 package com.ggg.gggapp.viewmodel.chat
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,18 +20,18 @@ class OneChatViewModel @Inject constructor(
     @Named("chatRepository") val repository: ChatRepository,
     @Named("messageRepository") val messageRepository: MessageRepository
 ) : ViewModel() {
-
+    private var undestroyed = true
     private val _chat = MutableLiveData<Chat>()
     val chat: LiveData<Chat> get() = _chat
     private val _status = MutableLiveData<ApiStatus>()
     val status: LiveData<ApiStatus> get() = _status
     private val _messageStatus = MutableLiveData<ApiStatus>()
     val messageStatus get() = _messageStatus
-
+    fun clear() = onCleared()
     fun getChat(id: Long, token: String) {
 
         viewModelScope.launch {
-            while (true) {
+            while (undestroyed) {
                 _status.value = ApiStatus.LOADING
                 try {
                     repository.getChat(token, id).collect {
@@ -65,4 +64,8 @@ class OneChatViewModel @Inject constructor(
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        undestroyed = false
+    }
 }
