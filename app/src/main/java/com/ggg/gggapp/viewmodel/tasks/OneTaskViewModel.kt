@@ -15,7 +15,7 @@ import javax.inject.Named
 
 @HiltViewModel
 class OneTaskViewModel @Inject constructor(
-    @Named("taskRepository") private val taskRepository: TaskRepository
+    @Named("taskRepository") private val taskRepository: TaskRepository,
 ) : ViewModel() {
     private val _task: MutableLiveData<Task> = MutableLiveData()
     val task: LiveData<Task> get() = _task
@@ -25,6 +25,8 @@ class OneTaskViewModel @Inject constructor(
     val status: LiveData<ApiStatus> get() = _status
     private val _deleteStatus: MutableLiveData<ApiStatus> = MutableLiveData()
     val deleteStatus: LiveData<ApiStatus> get() = _deleteStatus
+
+
     fun getTask(token: String, taskId: Long) {
         viewModelScope.launch {
             _taskStatus.value = ApiStatus.LOADING
@@ -67,7 +69,7 @@ class OneTaskViewModel @Inject constructor(
                         _deleteStatus.value = ApiStatus.FAILED
                     }
                 }
-            } catch (e: HttpException){
+            } catch (e: HttpException) {
                 _deleteStatus.value = ApiStatus.FAILED
             }
         }

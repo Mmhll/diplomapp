@@ -88,13 +88,16 @@
         android:id="@+id/oneTaskFragment"
         android:name="com.ggg.gggapp.fragments.tasks.OneTaskFragment"
         android:label="fragment_one_task"
-        tools:layout="@layout/fragment_one_task" >
+        tools:layout="@layout/fragment_one_task">
         <action
             android:id="@+id/action_oneTaskFragment_to_addAndRemoveMembersFragment"
             app:destination="@id/addAndRemoveMembersFragment" />
         <action
             android:id="@+id/action_oneTaskFragment_to_editTaskFragment"
             app:destination="@id/editTaskFragment" />
+        <action
+            android:id="@+id/action_oneTaskFragment_to_updateExecutorFragment"
+            app:destination="@id/updateExecutorFragment" />
     </fragment>
     <fragment
         android:id="@+id/addAndRemoveMembersFragment"
@@ -111,4 +114,9 @@
         android:name="com.ggg.gggapp.fragments.tasks.CreateTaskFragment"
         android:label="fragment_create_task"
         tools:layout="@layout/fragment_create_task" />
+    <fragment
+        android:id="@+id/updateExecutorFragment"
+        android:name="com.ggg.gggapp.fragments.tasks.UpdateExecutorFragment"
+        android:label="fragment_update_executor"
+        tools:layout="@layout/fragment_update_executor" />
 </navigation>

@@ -2,7 +2,6 @@ package com.ggg.gggapp.fragments.tasks
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,8 +63,6 @@ class AddAndRemoveMembersFragment : Fragment() {
             viewModel.apiStatus.observe(viewLifecycleOwner){
                 if (it == ApiStatus.COMPLETE){
                     findNavController().popBackStack()
-                } else {
-                    Log.e("ERROR", it.toString())
                 }
             }
         }

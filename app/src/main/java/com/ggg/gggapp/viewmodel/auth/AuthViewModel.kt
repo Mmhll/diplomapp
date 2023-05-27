@@ -26,14 +26,14 @@ class AuthViewModel @Inject constructor(
     fun authorize(email: String, password: String) {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
-            /*try {*/
+            try {
                 authRepository.auth(email, password).collect {
                     _data.value = it
                     _status.value = ApiStatus.COMPLETE
                 }
-            /*} catch (e: HttpException){
+            } catch (e: HttpException) {
                 _status.value = ApiStatus.FAILED
-            }*/
+            }
         }
     }
 

@@ -33,8 +33,7 @@ class OneTaskFragment : Fragment() {
     private val spinnerItems = arrayListOf("Новая", "В работе", "Выполненная", "Завершённая")
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentOneTaskBinding.inflate(layoutInflater)
         return binding.root
@@ -49,9 +48,21 @@ class OneTaskFragment : Fragment() {
         viewModel.getTask(token, taskId)
         viewModel.taskStatus.observe(viewLifecycleOwner) {
             if (it == ApiStatus.COMPLETE) {
+
+                binding.addMembersButton.isActivated = false
+                binding.editTaskButton.isActivated = false
+                binding.deleteMembersButton.isActivated = false
+                binding.editExecutorButton.isActivated = false
+                binding.deleteButton.isActivated = false
+
+
                 val task = viewModel.task.value
+                commonViewModel.fullTask.value = task
+                commonViewModel.users.value = viewModel.task.value!!.members
+
                 when (jwtParser.getId()) {
                     task!!.creator.id -> {
+                        binding.editExecutorButton.visibility = View.VISIBLE
                         binding.editTaskButton.visibility = View.VISIBLE
                         binding.deleteButton.visibility = View.VISIBLE
                         binding.membersLinear.visibility = View.VISIBLE
@@ -60,6 +71,7 @@ class OneTaskFragment : Fragment() {
                     task.executor.id -> {
                         spinnerItems.removeLast()
                         binding.membersLinear.visibility = View.VISIBLE
+                        binding.editExecutorButton.visibility = View.VISIBLE
                     }
 
                     else -> {
@@ -83,23 +95,25 @@ class OneTaskFragment : Fragment() {
                 binding.description.text = task.description
 
                 binding.status.setSelection(spinnerItems.indexOf(task.status))
+            } else {
+                binding.addMembersButton.isActivated = false
+                binding.editTaskButton.isActivated = false
+                binding.deleteMembersButton.isActivated = false
+                binding.editExecutorButton.isActivated = false
+                binding.deleteButton.isActivated = false
             }
         }
 
 
         val adapter: ArrayAdapter<String> = ArrayAdapter(
-            requireActivity(),
-            R.layout.simple_spinner_item, spinnerItems
+            requireActivity(), R.layout.simple_spinner_item, spinnerItems
         ).also {
             it.setDropDownViewResource(R.layout.simple_spinner_item_drop)
         }
         binding.status.adapter = adapter
         binding.status.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
+                parent: AdapterView<*>?, view: View?, position: Int, id: Long
             ) {
                 viewModel.updateStatus(token, commonViewModel.task.value!!, spinnerItems[position])
             }
@@ -108,6 +122,14 @@ class OneTaskFragment : Fragment() {
                 //Nothing to do
             }
         }
+        binding.editExecutorButton.setOnClickListener {
+            viewModel.taskStatus.observe(viewLifecycleOwner) {
+                findNavController().navigate(R.id.action_oneTaskFragment_to_updateExecutorFragment)
+            }
+
+        }
+
+
         binding.deleteButton.setOnClickListener {
             viewModel.deleteTask(token, taskId)
             findNavController().popBackStack()
@@ -115,21 +137,17 @@ class OneTaskFragment : Fragment() {
         }
         binding.addMembersButton.setOnClickListener {
             if (viewModel.taskStatus.value!! == ApiStatus.COMPLETE) {
-                commonViewModel.users.value = viewModel.task.value!!.members
                 commonViewModel.isDeleteAction = false
                 findNavController().navigate(R.id.action_oneTaskFragment_to_addAndRemoveMembersFragment)
             }
         }
         binding.deleteMembersButton.setOnClickListener {
             if (viewModel.taskStatus.value!! == ApiStatus.COMPLETE) {
-                commonViewModel.users.value = viewModel.task.value!!.members
-                commonViewModel.isDeleteAction = true
                 findNavController().navigate(R.id.action_oneTaskFragment_to_addAndRemoveMembersFragment)
             }
         }
         binding.editTaskButton.setOnClickListener {
-            if (viewModel.taskStatus.value == ApiStatus.COMPLETE){
-                commonViewModel.fullTask.value = viewModel.task.value
+            if (viewModel.taskStatus.value == ApiStatus.COMPLETE) {
                 findNavController().navigate(R.id.action_oneTaskFragment_to_editTaskFragment)
             }
         }

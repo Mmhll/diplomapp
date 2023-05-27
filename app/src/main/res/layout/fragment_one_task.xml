@@ -152,7 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="40dp"
             android:background="@drawable/corner"
-            android:text="@string/change"
+            android:text="@string/change_executor"
             android:textAllCaps="false"
             android:layout_marginTop="30dp"
             android:textColor="?attr/colorSecondary"

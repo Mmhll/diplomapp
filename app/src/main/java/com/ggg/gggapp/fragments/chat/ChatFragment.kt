@@ -2,7 +2,6 @@ package com.ggg.gggapp.fragments.chat
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,9 +51,6 @@ class ChatFragment : Fragment() {
                         }
                     })
                 }
-                ApiStatus.FAILED -> {
-                    Log.e("Error", "Something went wrong")
-                }
                 else -> {
 
                 }
@@ -70,7 +66,6 @@ class ChatFragment : Fragment() {
                         adapter.setChats(viewModel.chats.value!!)
                     }
                     ApiStatus.FAILED -> {
-                        Log.e("Error", "Something")
                     }
                     else -> {
 

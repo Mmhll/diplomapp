@@ -1,6 +1,5 @@
 package com.ggg.gggapp.viewmodel.tasks
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -47,7 +46,6 @@ class AddAndRemoveMembersViewModel @Inject constructor(
             try {
                 for (i in membersIds) {
                     taskRepository.addMember(token, i, taskId).collect { messageResponse ->
-                        Log.e("MESSAGE", messageResponse.message)
                         if (messageResponse.message != "User was added to task") {
                             _internalStatus.value = ApiStatus.FAILED
                         }
@@ -70,11 +68,8 @@ class AddAndRemoveMembersViewModel @Inject constructor(
         viewModelScope.launch {
             _apiStatus.value = ApiStatus.LOADING
             try {
-                Log.e("TASK_ID", taskId.toString())
-                Log.e("USER_IDS", membersIds.toString())
                 for (i in membersIds) {
                     taskRepository.deleteMember(token, i, taskId).collect { messageResponse ->
-                        Log.e("MESSAGE", messageResponse.message)
                         if (messageResponse.message != "User was deleted from task") {
                             _internalDeleteStatus.value = ApiStatus.FAILED
                         }

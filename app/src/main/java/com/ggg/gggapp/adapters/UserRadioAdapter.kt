@@ -1,15 +1,11 @@
 package com.ggg.gggapp.adapters
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.content.res.Resources
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ggg.gggapp.R
@@ -64,7 +60,6 @@ class UserRadioAdapter(private val context: Context) :
                 if (isChecked) {
                     selectedPosition = holder.adapterPosition
                     myListener.onItemClick(holder.adapterPosition)
-                    Log.e("TAG", users[selectedPosition].toString())
                 }
             }
         }

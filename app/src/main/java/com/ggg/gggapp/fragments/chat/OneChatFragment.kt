@@ -70,7 +70,6 @@ class OneChatFragment : Fragment() {
         }
         binding.sendMessageButton.setOnClickListener {
             val message = binding.newMessageInput.text.toString()
-            Log.e("TAG", message)
             if (message.isNotEmpty()) {
                 binding.newMessageInput.text.clear()
                 viewModel.sendMessage(token, JWTParser(token).getId(), message, id)
@@ -96,7 +95,6 @@ class OneChatFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         viewModel.clear()
-        Log.e("TAG", "Destroyed")
         _binding = null
     }
 }

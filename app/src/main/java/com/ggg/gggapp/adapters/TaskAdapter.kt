@@ -1,7 +1,6 @@
 package com.ggg.gggapp.adapters
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +51,6 @@ class TaskAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         if (tasks.size != 0) {
-            Log.e("TAG", tasks.toString())
             tasks.sortedWith(compareByDescending<Task> { task -> task.date_of_update }.thenByDescending { task -> task.creation_date })
             val userDataCreator = tasks[position].creator.userData
             val userDataExecutor = tasks[position].executor.userData

@@ -2,7 +2,6 @@ package com.ggg.gggapp.fragments.chat
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,9 +51,6 @@ class ChatUsersFragment : Fragment() {
                     commonViewModel.chat.value = chat
                     val users = chat.users
                     adapter.setUsers(users.toMutableList())
-                }
-                ApiStatus.FAILED -> {
-                    Log.e("Error", "Something went wrong")
                 }
                 else -> {}
             }

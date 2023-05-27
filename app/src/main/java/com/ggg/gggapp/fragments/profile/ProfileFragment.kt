@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.auth0.android.jwt.JWT
 import com.ggg.gggapp.R
 import com.ggg.gggapp.activities.MainActivity
 import com.ggg.gggapp.databinding.FragmentProfileBinding
@@ -71,13 +69,11 @@ class ProfileFragment : Fragment() {
                         Toast.makeText(
                             requireContext(), "Данные успешно изменены", Toast.LENGTH_SHORT
                         ).show()
-                        Log.e("TAG", jwtParser.getSubject())
                         authViewModel.authorize(jwtParser.getSubject(), password)
                         authViewModel.status.observe(viewLifecycleOwner){ status ->
                             if (status == ApiStatus.COMPLETE){
                                 sharedPrefs.edit().putString("token", authViewModel.data.value!!.token).apply()
                                 updateData(JWTParser(authViewModel.data.value!!.token))
-                                Log.e("TAG", "PIZDA")
                             }
 
                         }
@@ -108,6 +104,7 @@ class ProfileFragment : Fragment() {
                                     ).show()
                                     password = passwordText.text.toString()
                                     sharedPrefs.edit().putString("password", password).apply()
+                                    updateData(JWTParser(authViewModel.data.value!!.token))
                                 }
                                 ApiStatus.FAILED -> {
                                     Toast.makeText(

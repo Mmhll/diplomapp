@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hueta</string>
+    <string name="app_name">My Company</string>
     <string name="title_activity_bottom_navigation">BottomNavigationActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -55,6 +55,10 @@
     <string name="hint_task_name">Введите название задачи</string>
     <string name="deadline_hint">Выберите дату дедлайна</string>
     <string name="choose_executor">Выберите исполнителя</string>
+    <string name="create_task">Создать задачу</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="update_executor">Изменить исполнителя</string>
+    <string name="change_executor">Изменить исполнителя</string>
 
 
 </resources>

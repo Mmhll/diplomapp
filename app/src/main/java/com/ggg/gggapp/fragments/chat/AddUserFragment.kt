@@ -3,7 +3,6 @@ package com.ggg.gggapp.fragments.chat
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,7 +81,6 @@ class AddUserFragment : Fragment() {
                                 .show()
                         }
                         ApiStatus.FAILED -> {
-                            Log.e("Error", "Something went wrong")
                         }
                         else -> {}
                     }

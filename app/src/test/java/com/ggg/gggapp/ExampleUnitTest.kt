@@ -1,10 +1,6 @@
 package com.ggg.gggapp
 
-import android.content.res.Resources.NotFoundException
-import android.util.Log
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
