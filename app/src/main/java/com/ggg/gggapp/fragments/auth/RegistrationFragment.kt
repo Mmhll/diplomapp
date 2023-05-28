@@ -3,6 +3,7 @@ package com.ggg.gggapp.fragments.auth
 import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,41 +51,59 @@ class RegistrationFragment : Fragment() {
                 middlename.isNotEmpty() &&
                 phoneNumber.isNotEmpty()
             ) {
-                viewModel.register(
-                    token,
-                    email,
-                    password,
-                    firstname,
-                    lastname,
-                    middlename,
-                    phoneNumber
-                )
-                viewModel.status.observe(viewLifecycleOwner) {
-                    when (it) {
-                        ApiStatus.COMPLETE -> {
-                            AlertDialog.Builder(requireContext())
-                                .setTitle("Пользователь зарегистрирован")
-                                .setMessage(
-                                    "Для входа в поле username используйте ваш первоначальный email до знака '@' (${
-                                        email.split(
-                                            '@'
-                                        )[0]
-                                    })\nСоветуем изменить пароль при первом входе"
-                                )
-                                .setPositiveButton("Ok") { _, _ ->
-                                    findNavController().popBackStack()
-                                }
-                                .create()
-                                .show()
+                if (email.length >= 6 &&
+                    Patterns.EMAIL_ADDRESS.matcher(email).matches()
+                ) {
+                    viewModel.register(
+                        token,
+                        email,
+                        password,
+                        firstname,
+                        lastname,
+                        middlename,
+                        phoneNumber
+                    )
+                    viewModel.status.observe(viewLifecycleOwner) {
+                        when (it) {
+                            ApiStatus.COMPLETE -> {
+                                AlertDialog.Builder(requireContext())
+                                    .setTitle("Пользователь зарегистрирован")
+                                    .setMessage(
+                                        "Для входа в поле username используйте ваш первоначальный email до знака '@' (${
+                                            email.split(
+                                                '@'
+                                            )[0]
+                                        })\nСоветуем изменить пароль при первом входе"
+                                    )
+                                    .setPositiveButton("Ok") { _, _ ->
+                                        findNavController().popBackStack()
+                                    }
+                                    .create()
+                                    .show()
+                            }
+
+                            ApiStatus.FAILED -> {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Пользователь с этим первоначальным email уже зарегистрирован",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                            else -> {}
                         }
-                        ApiStatus.FAILED -> {
-                            Toast.makeText(requireContext(), "Пользователь с этим первоначальным email уже зарегистрирован", Toast.LENGTH_SHORT).show()
-                        }
-                        else -> {}
                     }
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "E-mail невалидный или длина пароля < 6",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
                 }
             } else {
-                Toast.makeText(requireContext(), "Какое-то из полей пустое", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Какое-то из полей пустое", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

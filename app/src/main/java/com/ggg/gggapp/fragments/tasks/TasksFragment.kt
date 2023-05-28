@@ -19,6 +19,7 @@ import com.ggg.gggapp.adapters.TaskAdapter
 import com.ggg.gggapp.databinding.FragmentTaskBinding
 import com.ggg.gggapp.utils.ApiStatus
 import com.ggg.gggapp.utils.JWTParser
+import com.ggg.gggapp.utils.PermissionName
 import com.ggg.gggapp.viewmodel.common.CommonTaskViewModel
 import com.ggg.gggapp.viewmodel.tasks.TasksViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +51,7 @@ class TasksFragment : Fragment() {
         val token = sharedPrefs.getString("token", "")!!
         val jwtParser = JWTParser(token)
         val role = jwtParser.getClaimString("permission")
-        if (role == "ROLE_USER"){
+        if (role == PermissionName.ROLE_USER.name) {
             binding.addTaskButton.visibility = View.GONE
         }
         val recyclerAdapter = TaskAdapter(requireContext())

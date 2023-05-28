@@ -3,36 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="16dp"
-    android:background="@color/white"
     android:layout_height="match_parent"
-    tools:context=".fragments.service.RolesFragment">
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/addRoleButton"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:background="@drawable/corner"
-        android:src="@drawable/add_img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:padding="16dp"
+    tools:context=".fragments.service.UsersFragment">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/rolesRefresher"
+        android:id="@+id/userRefresher"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addRoleButton">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/roleRecyclerView"
+            android:id="@+id/userRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

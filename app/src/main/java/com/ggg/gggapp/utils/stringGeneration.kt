@@ -34,10 +34,13 @@ private fun firstToUppercase(string: String): String{
     }
 }
 
-private fun lastnameUppercase(lastname: String): String{
-    return if(lastname.isNotEmpty()){
-        lastname.replaceFirstChar { char -> char.uppercase()}
+private fun lastnameUppercase(lastname: String): String {
+    return if (lastname.isNotEmpty()) {
+        lastname.replaceFirstChar { char -> char.uppercase() }
     } else {
         ""
     }
 }
+
+val permissionNameAscii: ArrayList<String> =
+    arrayListOf("Гость", "Сотрудник", "Модератор", "Администратор")

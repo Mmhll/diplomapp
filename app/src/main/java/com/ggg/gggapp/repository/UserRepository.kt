@@ -2,9 +2,9 @@ package com.ggg.gggapp.repository
 
 import com.ggg.gggapp.model.User
 import com.ggg.gggapp.remote_model.MessageResponse
-import com.ggg.gggapp.remote_model.OneParamRequest
 import com.ggg.gggapp.remote_model.UpdatePasswordRequest
 import com.ggg.gggapp.remote_model.UpdateUserRequest
+import com.ggg.gggapp.remote_model.UserIdAndRoleIdRequest
 import com.ggg.gggapp.service.UserService
 import com.ggg.gggapp.utils.generateToken
 import kotlinx.coroutines.flow.Flow
@@ -31,9 +31,20 @@ class UserRepository @Inject constructor(private val userService: UserService) {
         }
     }
 
-    fun deleteUser(token: String, email: String): Flow<MessageResponse> {
+    fun deleteUser(token: String, id: String): Flow<MessageResponse> {
         return flow {
-            emit(userService.deleteUser(generateToken(token), OneParamRequest(email)))
+            emit(userService.deleteUser(generateToken(token), id))
+        }
+    }
+
+    fun updateUserRole(token: String, userId: Long, roleId: Long): Flow<MessageResponse> {
+        return flow {
+            emit(
+                userService.updateUserRole(
+                    generateToken(token),
+                    UserIdAndRoleIdRequest(userId, roleId)
+                )
+            )
         }
     }
 

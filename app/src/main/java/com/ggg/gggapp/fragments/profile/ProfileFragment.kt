@@ -92,7 +92,7 @@ class ProfileFragment : Fragment() {
                 .setPositiveButton("Сменить пароль") { _, _ ->
                     val passwordText: EditText = dialogLayout.findViewById(R.id.newPassword)
                     val rePasswordText: EditText = dialogLayout.findViewById(R.id.newPasswordRepeat)
-                    if (passwordText.text.toString() == rePasswordText.text.toString()) {
+                    if (passwordText.text.toString() == rePasswordText.text.toString() && passwordText.text.toString().length >= 6) {
                         viewModel.setUserPassword(
                             token, UpdatePasswordRequest(id, username, passwordText.text.toString())
                         )
@@ -106,14 +106,22 @@ class ProfileFragment : Fragment() {
                                     sharedPrefs.edit().putString("password", password).apply()
                                     updateData(JWTParser(authViewModel.data.value!!.token))
                                 }
+
                                 ApiStatus.FAILED -> {
                                     Toast.makeText(
                                         requireContext(), "Что-то пошло не так", Toast.LENGTH_SHORT
                                     ).show()
                                 }
+
                                 else -> {}
                             }
                         }
+                    } else {
+                        Toast.makeText(
+                            requireActivity(),
+                            "Пароли не совпадают или длина пароля меньше 6 символов",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }.setNegativeButton("Отмена", null).show()
         }

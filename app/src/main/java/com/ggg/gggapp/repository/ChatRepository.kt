@@ -39,4 +39,10 @@ class ChatRepository @Inject constructor(@Named("chatService") private val servi
             emit(service.addMember(generateToken(token), ChatAndUserRequest(chat_id, user_id)))
         }
     }
+
+    suspend fun deleteChat(token: String, id: Long): Flow<MessageResponse> {
+        return flow {
+            emit(service.deleteChat(generateToken(token), id.toString()))
+        }
+    }
 }

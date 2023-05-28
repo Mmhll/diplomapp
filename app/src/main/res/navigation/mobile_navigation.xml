@@ -9,7 +9,14 @@
         android:id="@+id/navigation_services"
         android:name="com.ggg.gggapp.fragments.service.ServicesFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_services" />
+        tools:layout="@layout/fragment_services">
+        <action
+            android:id="@+id/action_navigation_services_to_usersFragment"
+            app:destination="@id/usersFragment" />
+        <action
+            android:id="@+id/action_navigation_services_to_rolesFragment"
+            app:destination="@id/rolesFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_task"
@@ -119,4 +126,23 @@
         android:name="com.ggg.gggapp.fragments.tasks.UpdateExecutorFragment"
         android:label="fragment_update_executor"
         tools:layout="@layout/fragment_update_executor" />
+    <fragment
+        android:id="@+id/rolesFragment"
+        android:name="com.ggg.gggapp.fragments.service.RolesFragment"
+        android:label="fragment_roles"
+        tools:layout="@layout/fragment_roles" />
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.ggg.gggapp.fragments.service.UsersFragment"
+        android:label="fragment_users"
+        tools:layout="@layout/fragment_users">
+        <action
+            android:id="@+id/action_usersFragment_to_oneUserFragment"
+            app:destination="@id/oneUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/oneUserFragment"
+        android:name="com.ggg.gggapp.fragments.service.OneUserFragment"
+        android:label="fragment_one_user"
+        tools:layout="@layout/fragment_one_user" />
 </navigation>

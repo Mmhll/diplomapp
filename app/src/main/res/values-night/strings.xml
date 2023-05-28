@@ -58,4 +58,10 @@
     <string name="create_task">Создать задачу</string>
     <string name="update_executor">Изменить исполнителя</string>
     <string name="change_executor">Изменить исполнителя</string>
+    <string name="roles_edit">Управление ролями</string>
+    <string name="users_edit">Управление пользователями</string>
+    <string name="chat_edit">Управление чатами</string>
+    <string name="rolename">RoleName</string>
+    <string name="permission">permission</string>
+    <string name="role">Роль</string>
 </resources>

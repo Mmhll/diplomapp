@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.ggg.gggapp.R
 import com.ggg.gggapp.databinding.ActivityBottomNavigationBinding
 import com.ggg.gggapp.utils.JWTParser
+import com.ggg.gggapp.utils.PermissionName
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,11 +46,8 @@ class BottomNavigationActivity : AppCompatActivity() {
         val jwtParser = JWTParser(token)
 
         when(jwtParser.getClaimString("permission")){
-            "ROLE_USER", "ROlE_EDITUSER" -> {
+            PermissionName.ROLE_USER.name, PermissionName.ROLE_EDITUSER.name -> {
                 navView?.menu?.removeItemAt(0)
-            }
-            else ->{
-
             }
         }
 

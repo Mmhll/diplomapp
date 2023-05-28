@@ -8,11 +8,29 @@ import retrofit2.http.*
 
 interface ChatService {
     @GET("chat/get_chats")
-    suspend fun getChats(@Header("Authorization") token: String, @Query("id") id: String): ArrayList<Chat>
+    suspend fun getChats(
+        @Header("Authorization") token: String,
+        @Query("id") id: String
+    ): ArrayList<Chat>
+
     @GET("chat/get_chat")
     suspend fun getChat(@Header("Authorization") token: String, @Query("id") id: String): Chat
+
     @POST("chat/create")
-    suspend fun createChat(@Header("Authorization") token: String, @Body request: CreateChatRequest): MessageResponse
+    suspend fun createChat(
+        @Header("Authorization") token: String,
+        @Body request: CreateChatRequest
+    ): MessageResponse
+
     @POST("chat/add_chat_member")
-    suspend fun addMember(@Header("Authorization") token: String, @Body request: ChatAndUserRequest): MessageResponse
+    suspend fun addMember(
+        @Header("Authorization") token: String,
+        @Body request: ChatAndUserRequest
+    ): MessageResponse
+
+    @DELETE("chat/delete_chat")
+    suspend fun deleteChat(
+        @Header("Authorization") token: String,
+        @Query("id") id: String
+    ): MessageResponse
 }

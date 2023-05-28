@@ -1,47 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="50dp"
+    android:paddingVertical="?actionBarSize"
     tools:context=".fragments.service.ServicesFragment">
-    <LinearLayout
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/editRolesButton"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="244dp"
+        android:background="@drawable/corner"
+        android:text="@string/roles_edit"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/docsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Заказ справки"
-            
-            android:layout_marginTop="150dp"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/hoursButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="График работы"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/changePassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Изменение пароля "
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/roleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Запрос роли"
-            />
-    </LinearLayout>
-    <FrameLayout
-        android:id="@+id/layoutFragment"
-        android:visibility="invisible"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/editUsersButton"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/corner"
+        android:text="@string/users_edit"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editRolesButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.ggg.gggapp.R
 import com.ggg.gggapp.databinding.FragmentServicesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,29 +22,17 @@ class ServicesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentServicesBinding.inflate(inflater, container, false)
-
-        /*binding.hoursButton.setOnClickListener {
-            binding.layoutFragment.visibility = View.VISIBLE
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(com.ggg.gggapp.R.id.layoutFragment, WorkTimeViewModel()).commit()
-        }
-        binding.roleButton.setOnClickListener {
-            binding.layoutFragment.visibility = View.VISIBLE
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(com.ggg.gggapp.R.id.layoutFragment, RolesViewModel()).commit()
-        }
-        binding.changePassword.setOnClickListener{
-            binding.layoutFragment.visibility = View.VISIBLE
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(com.ggg.gggapp.R.id.layoutFragment, ResetPasswordViewModel()).commit()
-        }*/
-        binding.docsButton.setOnClickListener {
-            /*var reference = FirebaseDatabase.getInstance().getReference("docs")
-            var key = reference.push().key
-            reference.child(key.toString()).setValue(Firebase.auth.uid)
-            Toast.makeText(requireContext(), "Заявка подана успешно, ожидайте", Toast.LENGTH_SHORT).show()*/
-        }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.editRolesButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_services_to_rolesFragment)
+        }
+        binding.editUsersButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_services_to_usersFragment)
+        }
     }
 
     override fun onDestroyView() {
