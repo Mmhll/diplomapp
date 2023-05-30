@@ -143,6 +143,7 @@ class OneTaskFragment : Fragment() {
         }
         binding.deleteMembersButton.setOnClickListener {
             if (viewModel.taskStatus.value!! == ApiStatus.COMPLETE) {
+                commonViewModel.isDeleteAction = true
                 findNavController().navigate(R.id.action_oneTaskFragment_to_addAndRemoveMembersFragment)
             }
         }

@@ -64,8 +64,14 @@ class OneChatViewModel @Inject constructor(
         }
     }
 
+
+
     override fun onCleared() {
         super.onCleared()
         undestroyed = false
+    }
+
+    fun restore() {
+        undestroyed = true
     }
 }

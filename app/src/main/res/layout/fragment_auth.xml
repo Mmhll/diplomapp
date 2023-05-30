@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
             android:src="@drawable/logo"
             />
 
@@ -32,9 +32,8 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:id="@+id/email"
-            android:backgroundTint="@color/black"
             android:drawableStart="@drawable/log"
-            android:hint="@string/email"
+            android:hint="@string/username"
             />
 
         <EditText

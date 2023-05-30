@@ -167,8 +167,8 @@ class OneUserFragment : Fragment() {
                 }
                 val spinnerAdapter: ArrayAdapter<String> = ArrayAdapter(
                     requireActivity(), R.layout.simple_spinner_item_black, arrayList
-                ).also { adapeter ->
-                    adapeter.setDropDownViewResource(R.layout.simple_spinner_item_drop)
+                ).also { adapter ->
+                    adapter.setDropDownViewResource(R.layout.simple_spinner_item_drop)
                 }
 
                 binding.roleOneUser.adapter = spinnerAdapter

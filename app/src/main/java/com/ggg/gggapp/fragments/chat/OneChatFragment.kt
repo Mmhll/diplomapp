@@ -31,6 +31,7 @@ class OneChatFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentOneChatBinding.inflate(layoutInflater)
+        viewModel.restore()
         return binding.root
     }
 
@@ -96,5 +97,9 @@ class OneChatFragment : Fragment() {
         super.onDestroyView()
         viewModel.clear()
         _binding = null
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
     }
 }
